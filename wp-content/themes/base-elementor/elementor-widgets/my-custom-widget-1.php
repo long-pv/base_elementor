@@ -247,6 +247,27 @@ class My_Custom_Widget_1 extends \Elementor\Widget_Base
             ]
         );
 
+        // Kiểu control là GALLERY
+        $this->add_control(
+            'image_gallery',
+            [
+                'label' => __('Select Images', 'base-elementor'),
+                'type' => \Elementor\Controls_Manager::GALLERY,
+                'default' => [],
+            ]
+        );
+
+        // Sử dụng control MEDIA để upload file PDF
+        $this->add_control(
+            'pdf_file',
+            [
+                'label' => __('Upload PDF File', 'base-elementor'),
+                'type' => \Elementor\Controls_Manager::MEDIA,
+                'media_types' => ['application/pdf'], // Giới hạn loại tệp là PDF
+                'default' => [],
+            ]
+        );
+
         $this->end_controls_section();
     }
 
@@ -288,6 +309,8 @@ class My_Custom_Widget_1 extends \Elementor\Widget_Base
         $toggle_input = $this->get_settings_for_display('toggle_input');
         $range_input = $this->get_settings_for_display('range_input');
         $selected_post_id = $this->get_settings_for_display('post_select');  // Lấy ID bài viết đã chọn
+        $gallery = $this->get_settings_for_display('image_gallery');
+        $pdf_file = $this->get_settings_for_display('pdf_file');
 
         // Bắt đầu render HTML
 ?>
@@ -360,6 +383,27 @@ class My_Custom_Widget_1 extends \Elementor\Widget_Base
                 }
             } else {
                 echo '<p>No post selected.</p>';
+            }
+
+            // render gallery
+            if (!empty($gallery)) {
+                echo '<div class="custom-widget-gallery">';
+                foreach ($gallery as $image) {
+                    $image_url = wp_get_attachment_image_url($image['id'], 'full');
+                    echo '<img src="' . esc_url($image_url) . '" alt="' . esc_attr($image['alt']) . '" style="max-width: 100%; margin-bottom: 10px;" />';
+                }
+                echo '</div>';
+            } else {
+                echo '<p>No images selected.</p>';
+            }
+
+            // render pdf
+            if (!empty($pdf_file['url'])) {
+                echo '<div class="custom-widget-pdf">';
+                echo '<a href="' . esc_url($pdf_file['url']) . '" target="_blank">' . __('Download PDF', 'base-elementor') . '</a>';
+                echo '</div>';
+            } else {
+                echo '<p>No PDF file selected.</p>';
             }
             ?>
         </div>
