@@ -69,7 +69,7 @@ wp-content/themes/twentytwentythree
 wp-content/themes/twentytwentyfour
 
 # wp-content / theme / inc
-wp-content/themes/*/inc/custom-header.php
-wp-content/themes/*/inc/customizer.php
-wp-content/themes/*/inc/jetpack.php
-wp-content/themes/*/inc/template-tags.php
+# wp-content/themes/*/inc/custom-header.php
+# wp-content/themes/*/inc/customizer.php
+# wp-content/themes/*/inc/jetpack.php
+# wp-content/themes/*/inc/template-tags.php
