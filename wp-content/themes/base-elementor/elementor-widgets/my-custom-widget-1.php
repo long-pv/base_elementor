@@ -234,7 +234,40 @@ class My_Custom_Widget_1 extends \Elementor\Widget_Base
             ]
         );
 
+        // lựa chọn danh sách bài viết
+        $this->add_control(
+            'post_select',
+            [
+                'label' => __('Select Post', 'base-elementor'),
+                'type' => \Elementor\Controls_Manager::SELECT2, // Kiểu chọn SELECT2 giúp dễ dàng tìm kiếm
+                'options' => $this->get_post_options(),
+                'multiple' => true,
+                'label_block' => true,
+                'default' => '',
+            ]
+        );
+
         $this->end_controls_section();
+    }
+
+    protected function get_post_options()
+    {
+        $args = [
+            'post_type' => 'post',
+            'posts_per_page' => -1,
+            'post_status' => 'publish',
+        ];
+
+        $posts = get_posts($args); // Truy vấn bài viết
+        $options = [];
+
+        if (!empty($posts)) {
+            foreach ($posts as $post) {
+                $options[$post->ID] = $post->post_title; // Trả về ID và tiêu đề của bài viết
+            }
+        }
+
+        return $options; // Trả về danh sách bài viết
     }
 
     protected function render()
@@ -254,6 +287,7 @@ class My_Custom_Widget_1 extends \Elementor\Widget_Base
         $editor_input = $this->get_settings_for_display('editor_input');
         $toggle_input = $this->get_settings_for_display('toggle_input');
         $range_input = $this->get_settings_for_display('range_input');
+        $selected_post_id = $this->get_settings_for_display('post_select');  // Lấy ID bài viết đã chọn
 
         // Bắt đầu render HTML
 ?>
@@ -313,6 +347,21 @@ class My_Custom_Widget_1 extends \Elementor\Widget_Base
 
             <!-- Hiển thị Range -->
             <p>Range Value: <?php echo esc_html($range_input['size']); ?>px</p>
+
+            <?php
+            // Nếu người dùng đã chọn bài viết
+            if ($selected_post_id) {
+                $post = get_post($selected_post_id); // Lấy đối tượng bài viết
+
+                // Hiển thị tiêu đề và nội dung của bài viết
+                if ($post) {
+                    echo '<h3>' . esc_html($post->post_title) . '</h3>';
+                    echo '<p>' . esc_html(get_the_excerpt($post)) . '</p>'; // Hiển thị excerpt của bài viết
+                }
+            } else {
+                echo '<p>No post selected.</p>';
+            }
+            ?>
         </div>
 <?php
     }
