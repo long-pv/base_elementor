@@ -1,13 +1,4 @@
 <?php
-function my_theme_setup()
-{
-    // Hỗ trợ cho Elementor Full Width
-    add_theme_support('elementor-full-width');
-    // Hỗ trợ Elementor Global CSS
-    add_theme_support('elementor-global-styles');
-}
-add_action('after_setup_theme', 'my_theme_setup');
-
 // stop upgrading wp cerber plugin
 add_filter('site_transient_update_plugins', 'disable_plugins_update');
 function disable_plugins_update($value)

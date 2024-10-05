@@ -1,6 +1,15 @@
 <?php
 if (! defined('ABSPATH')) exit; // Exit if accessed directly
 
+function base_elementor_theme_setup()
+{
+    // Hỗ trợ cho Elementor Full Width
+    add_theme_support('elementor-full-width');
+    // Hỗ trợ Elementor Global CSS
+    add_theme_support('elementor-global-styles');
+}
+add_action('after_setup_theme', 'base_elementor_theme_setup');
+
 // Bao gồm các widget tùy chỉnh
 require_once(__DIR__ . '/my-custom-widget-1.php');
 require_once(__DIR__ . '/my-custom-widget-2.php');
