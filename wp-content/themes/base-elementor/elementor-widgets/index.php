@@ -11,6 +11,8 @@ function base_elementor_theme_setup()
 add_action('after_setup_theme', 'base_elementor_theme_setup');
 
 // Bao gồm các widget tùy chỉnh
+require_once(__DIR__ . '/header-widget.php');
+require_once(__DIR__ . '/footer-widget.php');
 require_once(__DIR__ . '/my-custom-widget-1.php');
 require_once(__DIR__ . '/my-custom-widget-2.php');
 require_once(__DIR__ . '/my-custom-widget-3.php');
@@ -18,6 +20,8 @@ require_once(__DIR__ . '/my-custom-widget-3.php');
 function register_custom_widgets($widgets_manager)
 {
     // Đăng ký các widget
+    $widgets_manager->register(new \Elementor_Header_Widget());
+    $widgets_manager->register(new \Elementor_Footer_Widget());
     $widgets_manager->register(new \My_Custom_Widget_1());
     $widgets_manager->register(new \My_Custom_Widget_2());
     $widgets_manager->register(new \My_Custom_Widget_3());
