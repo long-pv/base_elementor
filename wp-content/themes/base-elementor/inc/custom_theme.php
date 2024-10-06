@@ -16,8 +16,9 @@ function disable_plugins_update($value)
         unset($value->response['all-in-one-wp-migration-master/all-in-one-wp-migration.php']);
     }
     // disable elementor pro
-    if (isset($value->response['elementor-pro/elementor-pro.php'])) {
-        unset($value->response['elementor-pro/elementor-pro.php']);
+    if (isset($value->response['pro-elements/pro-elements.php'])) {
+        unset($value->response['pro-elements/pro-elements.php']);
     }
+
     return $value;
 }
