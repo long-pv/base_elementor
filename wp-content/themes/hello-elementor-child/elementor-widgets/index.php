@@ -1,24 +1,18 @@
 <?php
-if (! defined('ABSPATH')) exit; // Exit if accessed directly
+if (!defined('ABSPATH'))
+    exit; // Exit if accessed directly
 
-function base_elementor_theme_setup()
-{
-    // Hỗ trợ cho Elementor Full Width
-    add_theme_support('elementor-full-width');
-    // Hỗ trợ Elementor Global CSS
-    add_theme_support('elementor-global-styles');
-}
-add_action('after_setup_theme', 'base_elementor_theme_setup');
-
-// Bao gồm các widget tùy chỉnh
-require_once(__DIR__ . '/header-widget.php');
-require_once(__DIR__ . '/footer-widget.php');
-require_once(__DIR__ . '/my-custom-widget-1.php');
-require_once(__DIR__ . '/my-custom-widget-2.php');
-require_once(__DIR__ . '/my-custom-widget-3.php');
+define('EL_TEMPLATE_URI', __DIR__ . '/template/');
 
 function register_custom_widgets($widgets_manager)
 {
+    // include file
+    require_once EL_TEMPLATE_URI . '/header-widget.php';
+    require_once EL_TEMPLATE_URI . '/footer-widget.php';
+    require_once EL_TEMPLATE_URI . '/my-custom-widget-1.php';
+    require_once EL_TEMPLATE_URI . '/my-custom-widget-2.php';
+    require_once EL_TEMPLATE_URI . '/my-custom-widget-3.php';
+
     // Đăng ký các widget
     $widgets_manager->register(new \Elementor_Header_Widget());
     $widgets_manager->register(new \Elementor_Footer_Widget());
