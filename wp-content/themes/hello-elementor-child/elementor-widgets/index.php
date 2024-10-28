@@ -13,17 +13,16 @@ function register_custom_widgets($widgets_manager)
     require_once EL_TEMPLATE_URI . '/my-custom-widget-2.php';
     require_once EL_TEMPLATE_URI . '/my-custom-widget-3.php';
 
-    // Đăng ký các widget
+    // Register widgets
     $widgets_manager->register(new \Elementor_Header_Widget());
     $widgets_manager->register(new \Elementor_Footer_Widget());
     $widgets_manager->register(new \My_Custom_Widget_1());
     $widgets_manager->register(new \My_Custom_Widget_2());
     $widgets_manager->register(new \My_Custom_Widget_3());
 }
-// Thêm hook để đăng ký widgets
 add_action('elementor/widgets/register', 'register_custom_widgets');
 
-function custom_widget_category($elements_manager)
+function register_custom_widget_category($elements_manager)
 {
     $elements_manager->add_category(
         'custom_widgets_theme',
@@ -34,5 +33,4 @@ function custom_widget_category($elements_manager)
         ]
     );
 }
-// Thêm hook cho nhóm
-add_action('elementor/elements/categories_registered', 'custom_widget_category');
+add_action('elementor/elements/categories_registered', 'register_custom_widget_category');
