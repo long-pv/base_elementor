@@ -11,7 +11,7 @@ class My_Custom_Widget_1 extends \Elementor\Widget_Base
 
     public function get_title()
     {
-        return __('My Custom Widget 1', 'base-elementor');
+        return __('My Custom Widget 1', 'child-theme');
     }
 
     public function get_icon()
@@ -30,7 +30,7 @@ class My_Custom_Widget_1 extends \Elementor\Widget_Base
         $this->start_controls_section(
             'content_section',
             [
-                'label' => __('Content', 'base-elementor'),
+                'label' => __('Content', 'child-theme'),
                 'tab' => \Elementor\Controls_Manager::TAB_CONTENT,
             ]
         );
@@ -39,9 +39,9 @@ class My_Custom_Widget_1 extends \Elementor\Widget_Base
         $this->add_control(
             'text_input',
             [
-                'label' => __('Text Input', 'base-elementor'),
+                'label' => __('Text Input', 'child-theme'),
                 'type' => \Elementor\Controls_Manager::TEXT,
-                'default' => __('Default text', 'base-elementor'),
+                'default' => __('Default text', 'child-theme'),
             ]
         );
 
@@ -49,9 +49,9 @@ class My_Custom_Widget_1 extends \Elementor\Widget_Base
         $this->add_control(
             'textarea_input',
             [
-                'label' => __('Textarea', 'base-elementor'),
+                'label' => __('Textarea', 'child-theme'),
                 'type' => \Elementor\Controls_Manager::TEXTAREA,
-                'default' => __('Default textarea content', 'base-elementor'),
+                'default' => __('Default textarea content', 'child-theme'),
             ]
         );
 
@@ -59,7 +59,7 @@ class My_Custom_Widget_1 extends \Elementor\Widget_Base
         $this->add_control(
             'number_input',
             [
-                'label' => __('Number', 'base-elementor'),
+                'label' => __('Number', 'child-theme'),
                 'type' => \Elementor\Controls_Manager::NUMBER,
                 'default' => 5,
             ]
@@ -69,10 +69,10 @@ class My_Custom_Widget_1 extends \Elementor\Widget_Base
         $this->add_control(
             'email_input',
             [
-                'label' => __('Email Address', 'base-elementor'),
+                'label' => __('Email Address', 'child-theme'),
                 'type' => \Elementor\Controls_Manager::TEXT,
                 'input_type' => 'email', // Chỉ định loại input là email (HTML5)
-                'placeholder' => __('Enter your email', 'base-elementor'),
+                'placeholder' => __('Enter your email', 'child-theme'),
                 'default' => '',
             ]
         );
@@ -81,7 +81,7 @@ class My_Custom_Widget_1 extends \Elementor\Widget_Base
         $this->add_control(
             'url_input',
             [
-                'label' => __('URL', 'base-elementor'),
+                'label' => __('URL', 'child-theme'),
                 'type' => \Elementor\Controls_Manager::URL,
                 'default' => [
                     'url' => 'https://example.com',
@@ -94,10 +94,10 @@ class My_Custom_Widget_1 extends \Elementor\Widget_Base
         $this->add_control(
             'checkbox_input',
             [
-                'label' => __('Enable Option', 'base-elementor'),
+                'label' => __('Enable Option', 'child-theme'),
                 'type' => \Elementor\Controls_Manager::SWITCHER,
-                'label_on' => __('Yes', 'base-elementor'),
-                'label_off' => __('No', 'base-elementor'),
+                'label_on' => __('Yes', 'child-theme'),
+                'label_off' => __('No', 'child-theme'),
                 'return_value' => 'yes',
                 'default' => 'no',
             ]
@@ -107,12 +107,12 @@ class My_Custom_Widget_1 extends \Elementor\Widget_Base
         $this->add_control(
             'select_input',
             [
-                'label' => __('Select', 'base-elementor'),
+                'label' => __('Select', 'child-theme'),
                 'type' => \Elementor\Controls_Manager::SELECT,
                 'options' => [
-                    'option_1' => __('Option 1', 'base-elementor'),
-                    'option_2' => __('Option 2', 'base-elementor'),
-                    'option_3' => __('Option 3', 'base-elementor'),
+                    'option_1' => __('Option 1', 'child-theme'),
+                    'option_2' => __('Option 2', 'child-theme'),
+                    'option_3' => __('Option 3', 'child-theme'),
                 ],
                 'default' => 'option_1',
             ]
@@ -122,7 +122,7 @@ class My_Custom_Widget_1 extends \Elementor\Widget_Base
         $this->add_control(
             'color_input',
             [
-                'label' => __('Color', 'base-elementor'),
+                'label' => __('Color', 'child-theme'),
                 'type' => \Elementor\Controls_Manager::COLOR,
                 'default' => '#ffffff',
             ]
@@ -132,7 +132,7 @@ class My_Custom_Widget_1 extends \Elementor\Widget_Base
         $this->add_control(
             'media_input',
             [
-                'label' => __('Media', 'base-elementor'),
+                'label' => __('Media', 'child-theme'),
                 'type' => \Elementor\Controls_Manager::MEDIA,
                 'default' => [
                     'url' => 'https://example.com/image.jpg',
@@ -144,7 +144,7 @@ class My_Custom_Widget_1 extends \Elementor\Widget_Base
         $this->add_control(
             'slider_input',
             [
-                'label' => __('Slider', 'base-elementor'),
+                'label' => __('Slider', 'child-theme'),
                 'type' => \Elementor\Controls_Manager::SLIDER,
                 'range' => [
                     'px' => [
@@ -163,14 +163,14 @@ class My_Custom_Widget_1 extends \Elementor\Widget_Base
         $this->add_control(
             'repeater_input',
             [
-                'label' => __('Repeater', 'base-elementor'),
+                'label' => __('Repeater', 'child-theme'),
                 'type' => \Elementor\Controls_Manager::REPEATER,
                 'fields' => [
                     [
                         'name' => 'repeater_item',
-                        'label' => __('Item', 'base-elementor'),
+                        'label' => __('Item', 'child-theme'),
                         'type' => \Elementor\Controls_Manager::TEXT,
-                        'default' => __('Repeater Item', 'base-elementor'),
+                        'default' => __('Repeater Item', 'child-theme'),
                     ],
                 ],
                 'title_field' => '{{{ repeater_item }}}',
@@ -181,9 +181,9 @@ class My_Custom_Widget_1 extends \Elementor\Widget_Base
         $this->add_control(
             'editor_input',
             [
-                'label' => __('Editor Input', 'base-elementor'),
+                'label' => __('Editor Input', 'child-theme'),
                 'type' => \Elementor\Controls_Manager::WYSIWYG,
-                'default' => __('Default content', 'base-elementor'),
+                'default' => __('Default content', 'child-theme'),
             ]
         );
 
@@ -191,10 +191,10 @@ class My_Custom_Widget_1 extends \Elementor\Widget_Base
         $this->add_control(
             'toggle_input',
             [
-                'label' => __('Toggle', 'base-elementor'),
+                'label' => __('Toggle', 'child-theme'),
                 'type' => \Elementor\Controls_Manager::SWITCHER,
-                'label_on' => __('Yes', 'base-elementor'),
-                'label_off' => __('No', 'base-elementor'),
+                'label_on' => __('Yes', 'child-theme'),
+                'label_off' => __('No', 'child-theme'),
                 'return_value' => 'yes',
                 'default' => 'no',
             ]
@@ -204,7 +204,7 @@ class My_Custom_Widget_1 extends \Elementor\Widget_Base
         $this->add_control(
             'range_input',
             [
-                'label' => __('Range', 'base-elementor'),
+                'label' => __('Range', 'child-theme'),
                 'type' => \Elementor\Controls_Manager::SLIDER,
                 'range' => [
                     'px' => [
@@ -223,12 +223,12 @@ class My_Custom_Widget_1 extends \Elementor\Widget_Base
         $this->add_control(
             'post_type_select',
             [
-                'label' => __('Select Post Type', 'base-elementor'),
+                'label' => __('Select Post Type', 'child-theme'),
                 'type' => \Elementor\Controls_Manager::SELECT,
                 'options' => [
-                    'post' => __('Post', 'base-elementor'),
-                    'page' => __('Page', 'base-elementor'),
-                    'your_custom_post_type' => __('Your Custom Post Type', 'base-elementor'), // Add any custom post types here
+                    'post' => __('Post', 'child-theme'),
+                    'page' => __('Page', 'child-theme'),
+                    'your_custom_post_type' => __('Your Custom Post Type', 'child-theme'), // Add any custom post types here
                 ],
                 'default' => 'post',
             ]
@@ -238,7 +238,7 @@ class My_Custom_Widget_1 extends \Elementor\Widget_Base
         $this->add_control(
             'post_select',
             [
-                'label' => __('Select Post', 'base-elementor'),
+                'label' => __('Select Post', 'child-theme'),
                 'type' => \Elementor\Controls_Manager::SELECT2, // Kiểu chọn SELECT2 giúp dễ dàng tìm kiếm
                 'options' => $this->get_post_options(),
                 'multiple' => true,
@@ -251,7 +251,7 @@ class My_Custom_Widget_1 extends \Elementor\Widget_Base
         $this->add_control(
             'image_gallery',
             [
-                'label' => __('Select Images', 'base-elementor'),
+                'label' => __('Select Images', 'child-theme'),
                 'type' => \Elementor\Controls_Manager::GALLERY,
                 'default' => [],
             ]
@@ -261,7 +261,7 @@ class My_Custom_Widget_1 extends \Elementor\Widget_Base
         $this->add_control(
             'pdf_file',
             [
-                'label' => __('Upload PDF File', 'base-elementor'),
+                'label' => __('Upload PDF File', 'child-theme'),
                 'type' => \Elementor\Controls_Manager::MEDIA,
                 'media_types' => ['application/pdf'], // Giới hạn loại tệp là PDF
                 'default' => [],
@@ -400,7 +400,7 @@ class My_Custom_Widget_1 extends \Elementor\Widget_Base
             // render pdf
             if (!empty($pdf_file['url'])) {
                 echo '<div class="custom-widget-pdf">';
-                echo '<a href="' . esc_url($pdf_file['url']) . '" target="_blank">' . __('Download PDF', 'base-elementor') . '</a>';
+                echo '<a href="' . esc_url($pdf_file['url']) . '" target="_blank">' . __('Download PDF', 'child-theme') . '</a>';
                 echo '</div>';
             } else {
                 echo '<p>No PDF file selected.</p>';

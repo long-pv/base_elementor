@@ -1,13 +1,14 @@
 <?php
 if (!defined('ABSPATH'))
     exit; // Exit if accessed directly
+define('TEMPLATE_PATH', CHILD_PATH . '/elementor-widgets/template/');
 
 // include file
-require_once CHILD_PATH . '/elementor-widgets/template/header-widget.php';
-require_once CHILD_PATH . '/elementor-widgets/template/footer-widget.php';
-require_once CHILD_PATH . '/elementor-widgets/template/my-custom-widget-1.php';
-require_once CHILD_PATH . '/elementor-widgets/template/my-custom-widget-2.php';
-require_once CHILD_PATH . '/elementor-widgets/template/my-custom-widget-3.php';
+require_once TEMPLATE_PATH . 'header-widget.php';
+require_once TEMPLATE_PATH . 'footer-widget.php';
+require_once TEMPLATE_PATH . 'my-custom-widget-1.php';
+require_once TEMPLATE_PATH . 'my-custom-widget-2.php';
+require_once TEMPLATE_PATH . 'my-custom-widget-3.php';
 
 function register_custom_widgets($widgets_manager)
 {
@@ -25,7 +26,7 @@ function register_custom_widget_category($elements_manager)
     $elements_manager->add_category(
         'custom_widgets_theme',
         [
-            'title' => __('Custom Widgets (theme)', 'base-elementor'),
+            'title' => __('Custom Widgets (theme)', 'child-theme'),
             'icon' => 'eicon-code',
             'priority' => 0,
         ]

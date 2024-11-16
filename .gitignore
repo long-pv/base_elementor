@@ -61,12 +61,14 @@ wp-content/ai1wm-backups/
 wp-content/cache/
 wp-content/autoptimize_404_handler.php
 wp-content/upgrade-temp-backup
+wp-content/mu-plugins
 
 # wp-content / theme
 wp-content/themes/twentytwentyone
 wp-content/themes/twentytwentytwo
 wp-content/themes/twentytwentythree
 wp-content/themes/twentytwentyfour
+wp-content/themes/twentytwentyfive
 
 # wp-content / theme / inc
 # wp-content/themes/*/inc/custom-header.php

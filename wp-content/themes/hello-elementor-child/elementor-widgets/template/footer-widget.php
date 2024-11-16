@@ -9,7 +9,7 @@ class Elementor_Footer_Widget extends \Elementor\Widget_Base
 
     public function get_title()
     {
-        return __('Footer', 'base-elementor');
+        return __('Footer', 'child-theme');
     }
 
     public function get_icon()
@@ -28,7 +28,7 @@ class Elementor_Footer_Widget extends \Elementor\Widget_Base
         $this->start_controls_section(
             'content_section',
             [
-                'label' => __('Content', 'base-elementor'),
+                'label' => __('Content', 'child-theme'),
                 'tab' => \Elementor\Controls_Manager::TAB_CONTENT,
             ]
         );
@@ -36,9 +36,9 @@ class Elementor_Footer_Widget extends \Elementor\Widget_Base
         $this->add_control(
             'footer_text',
             [
-                'label' => __('Footer Text', 'base-elementor'),
+                'label' => __('Footer Text', 'child-theme'),
                 'type' => \Elementor\Controls_Manager::TEXT,
-                'default' => __('This is the footer', 'base-elementor'),
+                'default' => __('This is the footer', 'child-theme'),
             ]
         );
 

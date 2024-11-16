@@ -1,0 +1,25 @@
+$body: #333333;
+$primary : #22A05B; //1
+$secondary : #29C06D; //2
+$success : #30E07F; //3
+$info : #36FF92; //4
+$warning : #E74C3C; //5
+
+body {
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 400;
+    line-height: 1.5;
+    color: #333333;
+    font-size: 16px;
+
+    @media (max-width: 999px) {
+        -webkit-touch-callout: none;
+        -khtml-user-select: none;
+        -ms-touch-action: pan-y;
+        touch-action: pan-y;
+    }
+}
+
+.mainBodyContent {
+    min-height: calc(100vh - 100px);
+}

@@ -15,6 +15,10 @@ function base_elementor_scripts()
     // jquery
     wp_enqueue_script('child-theme-script-jquery', CHILD_URI . '/assets/inc/jquery/jquery-3.7.1.min.js', array(), _S_VERSION, true);
 
+    // bootstrap
+    wp_enqueue_style('child-theme-style-bootstrap', CHILD_URI . '/assets/inc/bootstrap/bootstrap.min.css', array(), _S_VERSION);
+    wp_enqueue_script('child-theme-script-bootstrap', CHILD_URI . '/assets/inc/bootstrap/bootstrap.bundle.min.js', array(), _S_VERSION, true);
+
     // slick
     wp_enqueue_style('child-theme-style-slick-theme', CHILD_URI . '/assets/inc/slick/slick-theme.css', array(), _S_VERSION);
     wp_enqueue_style('child-theme-style-slick', CHILD_URI . '/assets/inc/slick/slick.css', array(), _S_VERSION);
