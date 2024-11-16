@@ -8,7 +8,7 @@ if (!defined('_S_VERSION')) {
 /**
  * Enqueue scripts and styles.
  */
-function base_elementor_scripts()
+function child_theme_scripts()
 {
     wp_enqueue_style('child-theme-style', CHILD_URI, array(), _S_VERSION);
 
@@ -46,7 +46,7 @@ function base_elementor_scripts()
     wp_enqueue_style('child-theme-style-main', CHILD_URI . '/assets/css/main.css', array(), _S_VERSION);
     wp_enqueue_script('child-theme-script-main', CHILD_URI . '/assets/js/main.js', array(), _S_VERSION, true);
 }
-add_action('wp_enqueue_scripts', 'base_elementor_scripts');
+add_action('wp_enqueue_scripts', 'child_theme_scripts');
 
 // Setup theme setting page
 if (function_exists('acf_add_options_page')) {
