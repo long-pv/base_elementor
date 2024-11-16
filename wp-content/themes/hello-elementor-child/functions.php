@@ -44,16 +44,6 @@ function base_elementor_scripts()
 }
 add_action('wp_enqueue_scripts', 'base_elementor_scripts');
 
-// include file function
-include_once CHILD_PATH . '/inc/ajax.php';
-include_once CHILD_PATH . '/inc/custom_theme.php';
-
-function load_custom_widgets()
-{
-    require_once CHILD_PATH . '/elementor-widgets/index.php';
-}
-add_action('elementor/init', 'load_custom_widgets');
-
 // Setup theme setting page
 if (function_exists('acf_add_options_page')) {
     $name_option = 'Theme Settings';
@@ -68,3 +58,63 @@ if (function_exists('acf_add_options_page')) {
         )
     );
 }
+
+// auto active plugins
+function activate_my_plugins()
+{
+    $plugins = [
+        'advanced-custom-fields-pro\acf.php',
+        'classic-editor\classic-editor.php',
+        'duplicate-post\duplicate-post.php',
+        'wordpress-seo\wp-seo.php',
+        'wp-cerber\wp-cerber.php',
+        'all-in-one-wp-migration-master\all-in-one-wp-migration.php',
+        'elementor\elementor.php',
+        'pro-elements\pro-elements.php',
+    ];
+
+    foreach ($plugins as $plugin) {
+        $plugin_path = WP_PLUGIN_DIR . '/' . $plugin;
+
+        if (file_exists($plugin_path) && !is_plugin_active($plugin)) {
+            activate_plugin($plugin);
+        }
+    }
+}
+add_action('admin_init', 'activate_my_plugins');
+
+// stop upgrading wp cerber plugin
+add_filter('site_transient_update_plugins', 'disable_plugins_update');
+function disable_plugins_update($value)
+{
+    // disable acf pro
+    if (isset($value->response['advanced-custom-fields-pro/acf.php'])) {
+        unset($value->response['advanced-custom-fields-pro/acf.php']);
+    }
+
+    // disable Elementor
+    if (isset($value->response['elementor/elementor.php'])) {
+        unset($value->response['elementor/elementor.php']);
+    }
+
+    // disable PRO Elements
+    if (isset($value->response['pro-elements/pro-elements.php'])) {
+        unset($value->response['pro-elements/pro-elements.php']);
+    }
+
+    // disable All-in-One WP Migration
+    if (isset($value->response['all-in-one-wp-migration-master/all-in-one-wp-migration.php'])) {
+        unset($value->response['all-in-one-wp-migration-master/all-in-one-wp-migration.php']);
+    }
+    return $value;
+}
+add_filter('auto_update_plugin', '__return_false');
+
+// include file function
+require CHILD_PATH . '/inc/ajax.php';
+require CHILD_PATH . '/inc/custom_theme.php';
+function load_custom_widgets()
+{
+    require CHILD_PATH . '/elementor-widgets/index.php';
+}
+add_action('elementor/init', 'load_custom_widgets');

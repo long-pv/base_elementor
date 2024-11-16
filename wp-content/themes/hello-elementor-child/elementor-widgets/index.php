@@ -2,17 +2,15 @@
 if (!defined('ABSPATH'))
     exit; // Exit if accessed directly
 
-define('EL_TEMPLATE_URI', __DIR__ . '/template/');
+// include file
+require_once CHILD_PATH . '/elementor-widgets/template/header-widget.php';
+require_once CHILD_PATH . '/elementor-widgets/template/footer-widget.php';
+require_once CHILD_PATH . '/elementor-widgets/template/my-custom-widget-1.php';
+require_once CHILD_PATH . '/elementor-widgets/template/my-custom-widget-2.php';
+require_once CHILD_PATH . '/elementor-widgets/template/my-custom-widget-3.php';
 
 function register_custom_widgets($widgets_manager)
 {
-    // include file
-    require_once EL_TEMPLATE_URI . '/header-widget.php';
-    require_once EL_TEMPLATE_URI . '/footer-widget.php';
-    require_once EL_TEMPLATE_URI . '/my-custom-widget-1.php';
-    require_once EL_TEMPLATE_URI . '/my-custom-widget-2.php';
-    require_once EL_TEMPLATE_URI . '/my-custom-widget-3.php';
-
     // Register widgets
     $widgets_manager->register(new \Elementor_Header_Widget());
     $widgets_manager->register(new \Elementor_Footer_Widget());
