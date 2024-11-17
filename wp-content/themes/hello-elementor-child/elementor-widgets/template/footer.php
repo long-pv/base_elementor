@@ -1,10 +1,10 @@
 <?php
-class Elementor_Footer_Widget extends \Elementor\Widget_Base
+class Footer_Widget extends \Elementor\Widget_Base
 {
 
     public function get_name()
     {
-        return 'custom_footer';
+        return 'Footer_Widget';
     }
 
     public function get_title()
@@ -24,7 +24,6 @@ class Elementor_Footer_Widget extends \Elementor\Widget_Base
 
     protected function _register_controls()
     {
-        // Thêm các điều khiển tùy chỉnh cho footer ở đây
         $this->start_controls_section(
             'content_section',
             [

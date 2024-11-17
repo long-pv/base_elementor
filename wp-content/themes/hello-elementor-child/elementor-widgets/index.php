@@ -4,20 +4,18 @@ if (!defined('ABSPATH'))
 define('TEMPLATE_PATH', CHILD_PATH . '/elementor-widgets/template/');
 
 // include file
-require_once TEMPLATE_PATH . 'header-widget.php';
-require_once TEMPLATE_PATH . 'footer-widget.php';
-require_once TEMPLATE_PATH . 'my-custom-widget-1.php';
-require_once TEMPLATE_PATH . 'my-custom-widget-2.php';
-require_once TEMPLATE_PATH . 'my-custom-widget-3.php';
+require_once TEMPLATE_PATH . 'header.php';
+require_once TEMPLATE_PATH . 'footer.php';
+require_once TEMPLATE_PATH . 'heading.php';
+require_once TEMPLATE_PATH . 'button_link.php';
 
 function register_custom_widgets($widgets_manager)
 {
     // Register widgets
-    $widgets_manager->register(new \Elementor_Header_Widget());
-    $widgets_manager->register(new \Elementor_Footer_Widget());
-    $widgets_manager->register(new \My_Custom_Widget_1());
-    $widgets_manager->register(new \My_Custom_Widget_2());
-    $widgets_manager->register(new \My_Custom_Widget_3());
+    $widgets_manager->register(new \Header_Widget());
+    $widgets_manager->register(new \Footer_Widget());
+    $widgets_manager->register(new \Heading_Widget());
+    $widgets_manager->register(new \Button_Link_Widget());
 }
 add_action('elementor/widgets/register', 'register_custom_widgets');
 

@@ -1,27 +1,27 @@
 <?php
 
-if (! defined('ABSPATH')) exit; // Exit if accessed directly
+if (! defined('ABSPATH')) exit;
 
-class My_Custom_Widget_1 extends \Elementor\Widget_Base
+class Custom_Widget extends \Elementor\Widget_Base
 {
     public function get_name()
     {
-        return 'my_custom_widget_1';
+        return 'Custom_Widget';
     }
 
     public function get_title()
     {
-        return __('My Custom Widget 1', 'child-theme');
+        return __('Custom Widget', 'child-theme');
     }
 
     public function get_icon()
     {
-        return 'eicon-code'; // Icon cho widget
+        return 'eicon-code';
     }
 
     public function get_categories()
     {
-        return ['custom_widgets_theme']; // Nhóm widgets của bạn
+        return ['custom_widgets_theme'];
     }
 
     protected function _register_controls()

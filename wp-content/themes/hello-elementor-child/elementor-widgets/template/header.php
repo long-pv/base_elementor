@@ -1,10 +1,10 @@
 <?php
-class Elementor_Header_Widget extends \Elementor\Widget_Base
+class Header_Widget extends \Elementor\Widget_Base
 {
 
     public function get_name()
     {
-        return 'custom_header';
+        return 'Header_Widget';
     }
 
     public function get_title()
@@ -14,7 +14,7 @@ class Elementor_Header_Widget extends \Elementor\Widget_Base
 
     public function get_icon()
     {
-        return 'eicon-code'; // Icon cho widget
+        return 'eicon-code';
     }
 
     public function get_categories()
@@ -24,7 +24,6 @@ class Elementor_Header_Widget extends \Elementor\Widget_Base
 
     protected function _register_controls()
     {
-        // Thêm các điều khiển tùy chỉnh cho header ở đây
         $this->start_controls_section(
             'content_section',
             [
@@ -33,7 +32,6 @@ class Elementor_Header_Widget extends \Elementor\Widget_Base
             ]
         );
 
-        // Điều khiển chọn ảnh logo
         $this->add_control(
             'logo_image',
             [
@@ -45,7 +43,6 @@ class Elementor_Header_Widget extends \Elementor\Widget_Base
             ]
         );
 
-        // Điều khiển chọn menu
         $this->add_control(
             'select_menu',
             [
