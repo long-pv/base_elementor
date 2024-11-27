@@ -1,6 +1,5 @@
 <?php
-
-if (!defined('ABSPATH')) exit;
+if (!defined('ABSPATH')) exit; // Exit if accessed directly
 
 class Button_Link_Widget extends \Elementor\Widget_Base
 {
@@ -11,7 +10,7 @@ class Button_Link_Widget extends \Elementor\Widget_Base
 
     public function get_title()
     {
-        return __('Button Link', 'child-theme');
+        return __('Button Link', 'child_theme');
     }
 
     public function get_icon()
@@ -29,7 +28,7 @@ class Button_Link_Widget extends \Elementor\Widget_Base
         $this->start_controls_section(
             'content_section',
             [
-                'label' => __('Content', 'child-theme'),
+                'label' => __('Content', 'child_theme'),
                 'tab'   => \Elementor\Controls_Manager::TAB_CONTENT,
             ]
         );
@@ -38,10 +37,10 @@ class Button_Link_Widget extends \Elementor\Widget_Base
         $this->add_control(
             'button_text',
             [
-                'label'       => __('Button Text', 'child-theme'),
+                'label'       => __('Button Text', 'child_theme'),
                 'type'        => \Elementor\Controls_Manager::TEXT,
-                'default'     => __('Click Here', 'child-theme'),
-                'placeholder' => __('Enter button text', 'child-theme'),
+                'default'     => __('Click Here', 'child_theme'),
+                'placeholder' => __('Enter button text', 'child_theme'),
             ]
         );
 
@@ -49,9 +48,9 @@ class Button_Link_Widget extends \Elementor\Widget_Base
         $this->add_control(
             'button_link',
             [
-                'label'       => __('Button Link', 'child-theme'),
+                'label'       => __('Button Link', 'child_theme'),
                 'type'        => \Elementor\Controls_Manager::URL,
-                'placeholder' => __('https://example.com', 'child-theme'),
+                'placeholder' => __('https://example.com', 'child_theme'),
                 'default'     => [
                     'url'    => '#',
                     'is_external' => false,
@@ -64,13 +63,13 @@ class Button_Link_Widget extends \Elementor\Widget_Base
         $this->add_control(
             'button_align',
             [
-                'label'   => __('Button Alignment', 'child-theme'),
+                'label'   => __('Button Alignment', 'child_theme'),
                 'type'    => \Elementor\Controls_Manager::SELECT,
                 'default' => 'flex-start',
                 'options' => [
-                    'flex-start' => __('Left', 'child-theme'),
-                    'center'     => __('Center', 'child-theme'),
-                    'flex-end'   => __('Right', 'child-theme'),
+                    'flex-start' => __('Left', 'child_theme'),
+                    'center'     => __('Center', 'child_theme'),
+                    'flex-end'   => __('Right', 'child_theme'),
                 ],
             ]
         );

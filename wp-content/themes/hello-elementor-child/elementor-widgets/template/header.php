@@ -1,4 +1,6 @@
 <?php
+if (!defined('ABSPATH')) exit; // Exit if accessed directly
+
 class Header_Widget extends \Elementor\Widget_Base
 {
 
@@ -9,7 +11,7 @@ class Header_Widget extends \Elementor\Widget_Base
 
     public function get_title()
     {
-        return __('Header', 'child-theme');
+        return __('Header', 'child_theme');
     }
 
     public function get_icon()
@@ -27,7 +29,7 @@ class Header_Widget extends \Elementor\Widget_Base
         $this->start_controls_section(
             'content_section',
             [
-                'label' => __('Content', 'child-theme'),
+                'label' => __('Content', 'child_theme'),
                 'tab' => \Elementor\Controls_Manager::TAB_CONTENT,
             ]
         );
@@ -35,7 +37,7 @@ class Header_Widget extends \Elementor\Widget_Base
         $this->add_control(
             'logo_image',
             [
-                'label' => __('Logo Image', 'child-theme'),
+                'label' => __('Logo Image', 'child_theme'),
                 'type' => \Elementor\Controls_Manager::MEDIA,
                 'default' => [
                     'url' => \Elementor\Utils::get_placeholder_image_src(),
@@ -46,12 +48,12 @@ class Header_Widget extends \Elementor\Widget_Base
         $this->add_control(
             'select_menu',
             [
-                'label' => __('Select Menu', 'child-theme'),
+                'label' => __('Select Menu', 'child_theme'),
                 'type' => \Elementor\Controls_Manager::SELECT,
                 'options' => $this->get_available_menus(),
                 'default' => '',
                 'description' => sprintf(
-                    __('Manage your menus <a href="%s" target="_blank">here</a>.', 'child-theme'),
+                    __('Manage your menus <a href="%s" target="_blank">here</a>.', 'child_theme'),
                     esc_url(admin_url('nav-menus.php'))
                 ),
             ]
@@ -70,7 +72,7 @@ class Header_Widget extends \Elementor\Widget_Base
                 $menu_options[$menu->slug] = $menu->name;
             }
         } else {
-            $menu_options[''] = __('No menus available', 'child-theme');
+            $menu_options[''] = __('No menus available', 'child_theme');
         }
 
         return $menu_options;

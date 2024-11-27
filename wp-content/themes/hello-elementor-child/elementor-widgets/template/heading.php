@@ -1,7 +1,5 @@
 <?php
-
 if (!defined('ABSPATH')) exit; // Exit if accessed directly
-
 class Heading_Widget extends \Elementor\Widget_Base
 {
     public function get_name()
@@ -11,7 +9,7 @@ class Heading_Widget extends \Elementor\Widget_Base
 
     public function get_title()
     {
-        return __('Heading', 'child-theme');
+        return __('Heading', 'child_theme');
     }
 
     public function get_icon()
@@ -29,7 +27,7 @@ class Heading_Widget extends \Elementor\Widget_Base
         $this->start_controls_section(
             'content_section',
             [
-                'label' => __('Content', 'child-theme'),
+                'label' => __('Content', 'child_theme'),
                 'tab'   => \Elementor\Controls_Manager::TAB_CONTENT,
             ]
         );
@@ -38,10 +36,10 @@ class Heading_Widget extends \Elementor\Widget_Base
         $this->add_control(
             'heading_title',
             [
-                'label'       => __('Heading Title', 'child-theme'),
+                'label'       => __('Heading Title', 'child_theme'),
                 'type'        => \Elementor\Controls_Manager::TEXT,
-                'default'     => __('Title section', 'child-theme'),
-                'placeholder' => __('Enter your title here', 'child-theme'),
+                'default'     => __('Title section', 'child_theme'),
+                'placeholder' => __('Enter your title here', 'child_theme'),
             ]
         );
 
@@ -49,10 +47,10 @@ class Heading_Widget extends \Elementor\Widget_Base
         $this->add_control(
             'heading_description',
             [
-                'label'       => __('Description', 'child-theme'),
+                'label'       => __('Description', 'child_theme'),
                 'type'        => \Elementor\Controls_Manager::TEXTAREA,
-                'default'     => __('This is a description', 'child-theme'),
-                'placeholder' => __('Enter your description here', 'child-theme'),
+                'default'     => __('This is a description', 'child_theme'),
+                'placeholder' => __('Enter your description here', 'child_theme'),
             ]
         );
 
@@ -60,13 +58,13 @@ class Heading_Widget extends \Elementor\Widget_Base
         $this->add_control(
             'text_align',
             [
-                'label'   => __('Text Alignment', 'child-theme'),
+                'label'   => __('Text Alignment', 'child_theme'),
                 'type'    => \Elementor\Controls_Manager::SELECT,
                 'default' => 'left',
                 'options' => [
-                    'left'   => __('Left', 'child-theme'),
-                    'center' => __('Center', 'child-theme'),
-                    'right'  => __('Right', 'child-theme'),
+                    'left'   => __('Left', 'child_theme'),
+                    'center' => __('Center', 'child_theme'),
+                    'right'  => __('Right', 'child_theme'),
                 ],
             ]
         );
