@@ -13,6 +13,12 @@ function child_theme_scripts()
 {
     wp_enqueue_style('child_theme-style', CHILD_URI, array(), _S_VERSION);
 
+    // normalize
+    wp_enqueue_style('child_theme-style-normalize', CHILD_URI . '/assets/inc/normalize/normalize.css', array(), _S_VERSION);
+
+    // bootstrap grid
+    wp_enqueue_style('child_theme-style-grid', CHILD_URI . '/assets/inc/bootstrap/grid.css', array(), _S_VERSION);
+
     // jquery ui
     wp_enqueue_style('child_theme-style-jquery-ui', CHILD_URI . '/assets/inc/jquery-ui/jquery-ui.css', array(), _S_VERSION);
     wp_enqueue_script('child_theme-script-jquery-ui', CHILD_URI . '/assets/inc/jquery-ui/jquery-ui.js', array('jquery'), _S_VERSION, true);
