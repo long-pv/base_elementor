@@ -5,15 +5,9 @@ function register_custom_widgets($widgets_manager)
 {
     // include file
     require_once TEMPLATE_PATH . 'header.php';
-    require_once TEMPLATE_PATH . 'footer.php';
-    require_once TEMPLATE_PATH . 'heading.php';
-    require_once TEMPLATE_PATH . 'button_link.php';
 
     // Register widgets
     $widgets_manager->register(new \Header_Widget());
-    $widgets_manager->register(new \Footer_Widget());
-    $widgets_manager->register(new \Heading_Widget());
-    $widgets_manager->register(new \Button_Link_Widget());
 }
 add_action('elementor/widgets/register', 'register_custom_widgets');
 

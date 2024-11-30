@@ -6,6 +6,10 @@ if (!defined('_S_VERSION')) {
     define('_S_VERSION', '1.0.0');
 }
 
+// turn off auto update core wp
+define('AUTOMATIC_UPDATER_DISABLED', true);
+define('WP_AUTO_UPDATE_CORE', false);
+
 /**
  * Enqueue scripts and styles.
  */
@@ -119,11 +123,15 @@ function disable_plugins_update($value)
     }
     return $value;
 }
+// turn off auto update plugin
 add_filter('auto_update_plugin', '__return_false');
 
 // include file function
+require CHILD_PATH . '/inc/security.php';
 require CHILD_PATH . '/inc/ajax.php';
 require CHILD_PATH . '/inc/custom_theme.php';
+
+// load widgets library
 function load_custom_widgets()
 {
     require CHILD_PATH . '/elementor-widgets/index.php';
