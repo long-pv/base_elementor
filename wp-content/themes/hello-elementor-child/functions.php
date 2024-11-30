@@ -123,6 +123,7 @@ function disable_plugins_update($value)
     }
     return $value;
 }
+
 // turn off auto update plugin
 add_filter('auto_update_plugin', '__return_false');
 
