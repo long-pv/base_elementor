@@ -97,15 +97,18 @@ class Header_Widget extends \Elementor\Widget_Base
                             <!-- menu PC -->
                             <?php
                             if (!empty($settings['select_menu'])) {
-                                if (has_nav_menu($settings['select_menu'])) {
+                                $menu_exists = wp_get_nav_menu_object($settings['select_menu']);
+                                if ($menu_exists) {
                                     wp_nav_menu(
                                         array(
-                                            'theme_location' => $settings['select_menu'],
+                                            'menu' => $settings['select_menu'],
                                             'container' => 'nav',
                                             'container_class' => 'header__menupc',
                                             'depth' => 2,
                                         )
                                     );
+                                } else {
+                                    echo 'Menu not found.';
                                 }
                             }
                             ?>
@@ -127,15 +130,18 @@ class Header_Widget extends \Elementor\Widget_Base
         <div class="header__menusp">
             <?php
             if (!empty($settings['select_menu'])) {
-                if (has_nav_menu($settings['select_menu'])) {
+                $menu_exists = wp_get_nav_menu_object($settings['select_menu']);
+                if ($menu_exists) {
                     wp_nav_menu(
                         array(
-                            'theme_location' => $settings['select_menu'],
+                            'menu' => $settings['select_menu'],
                             'container' => 'nav',
                             'container_class' => 'header__menuspInner',
                             'depth' => 2,
                         )
                     );
+                } else {
+                    echo 'Menu not found.';
                 }
             }
             ?>
