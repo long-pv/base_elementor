@@ -6,11 +6,11 @@ $info : #36FF92; //4
 $warning : #E74C3C; //5
 
 body {
-    font-family: 'Montserrat', sans-serif;
-    font-weight: 400;
-    line-height: 1.5;
-    color: $body;
-    font-size: 16px;
+    line-height: 1.5 !important;
+}
+
+.elementor-widget-text-editor .elementor-widget-container>*:last-child {
+    margin: 0px;
 }
 
 .heading_widget_title {
