@@ -13,28 +13,14 @@ body {
     margin: 0px;
 }
 
-.heading_widget_title {
-    margin-bottom: 16px;
-    font-size: 28px;
-    font-weight: 700;
-    margin-top: 0px;
-}
+.elementor-button-link {
 
-.heading_widget_desc {
-    margin-bottom: 0px;
-    font-style: 16px;
-}
+    .elementor-button-icon,
+    .elementor-button-text {
+        display: flex !important;
+    }
 
-.button_link_widget_btn {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: 16px 32px;
-    border-radius: 4px;
-    background-color: #c0c0c0 !important;
-    color: #fff !important;
-    font-weight: 700;
-    text-decoration: none !important;
-    font-size: 16px;
-    transition: all 0.3s;
+    .elementor-button-content-wrapper {
+        align-items: center !important;
+    }
 }
