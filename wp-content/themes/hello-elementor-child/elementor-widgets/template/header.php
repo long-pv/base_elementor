@@ -40,7 +40,7 @@ class Header_Widget extends \Elementor\Widget_Base
                 'label' => __('Logo Image', 'child_theme'),
                 'type' => \Elementor\Controls_Manager::MEDIA,
                 'default' => [
-                    'url' => \Elementor\Utils::get_placeholder_image_src(),
+                    'url' => '',
                 ],
             ]
         );
@@ -81,27 +81,30 @@ class Header_Widget extends \Elementor\Widget_Base
     protected function render()
     {
         $settings = $this->get_settings_for_display();
+        $logo_image = $settings['logo_image'] ?? '';
+        $select_menu = $settings['select_menu'] ?? '';
 ?>
         <header class="header">
             <div class="header__inner">
                 <div class="row">
                     <div class="col-6 col-lg-3">
-                        <a href="<?php echo home_url(); ?>" class="header__logo">
-                            <?php $logo_url = $settings['logo_image']['url'] ?? ''; ?>
-                            <img src="<?php echo $logo_url; ?>" alt="logo">
-                        </a>
+                        <?php if ($logo_image['id']) : ?>
+                            <a href="<?php echo home_url(); ?>" class="header__logo">
+                                <?php echo wp_get_attachment_image($logo_image['id'], 'large'); ?>
+                            </a>
+                        <?php endif; ?>
                     </div>
 
                     <div class="col-6 col-lg-9">
                         <div class="header__navInner">
                             <!-- menu PC -->
                             <?php
-                            if (!empty($settings['select_menu'])) {
-                                $menu_exists = wp_get_nav_menu_object($settings['select_menu']);
+                            if (!empty($select_menu)) {
+                                $menu_exists = wp_get_nav_menu_object($select_menu);
                                 if ($menu_exists) {
                                     wp_nav_menu(
                                         array(
-                                            'menu' => $settings['select_menu'],
+                                            'menu' => $select_menu,
                                             'container' => 'nav',
                                             'container_class' => 'header__menupc',
                                             'depth' => 2,
@@ -129,12 +132,12 @@ class Header_Widget extends \Elementor\Widget_Base
         <!-- menu Mobile -->
         <div class="header__menusp">
             <?php
-            if (!empty($settings['select_menu'])) {
-                $menu_exists = wp_get_nav_menu_object($settings['select_menu']);
+            if (!empty($select_menu)) {
+                $menu_exists = wp_get_nav_menu_object($select_menu);
                 if ($menu_exists) {
                     wp_nav_menu(
                         array(
-                            'menu' => $settings['select_menu'],
+                            'menu' => $select_menu,
                             'container' => 'nav',
                             'container_class' => 'header__menuspInner',
                             'depth' => 2,
