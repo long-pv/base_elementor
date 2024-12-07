@@ -128,7 +128,7 @@ function disable_plugins_update($value)
 }
 
 // turn off auto update plugin
-add_filter('auto_update_plugin', '__return_false');
+// add_filter('auto_update_plugin', '__return_false');
 
 // include file function
 require CHILD_PATH . '/inc/security.php';
@@ -141,21 +141,3 @@ function load_custom_widgets()
     require CHILD_PATH . '/elementor-widgets/index.php';
 }
 add_action('elementor/init', 'load_custom_widgets');
-
-
-// Disable notifications
-function disable_all_update_notifications()
-{
-    // Disable WordPress core update notifications
-    add_filter('pre_site_transient_update_core', '__return_null');
-
-    // Disable plugin update notifications
-    add_filter('pre_site_transient_update_plugins', '__return_null');
-
-    // Disable theme update notifications
-    add_filter('pre_site_transient_update_themes', '__return_null');
-
-    // Disable general update notifications
-    remove_action('admin_notices', 'update_nag', 3);
-}
-add_action('admin_init', 'disable_all_update_notifications');
