@@ -82,11 +82,6 @@ function activate_my_plugins()
 {
     $plugins = [
         'advanced-custom-fields-pro\acf.php',
-        'classic-editor\classic-editor.php',
-        'duplicate-post\duplicate-post.php',
-        'wordpress-seo\wp-seo.php',
-        'wp-cerber\wp-cerber.php',
-        'all-in-one-wp-migration-master\all-in-one-wp-migration.php',
         'elementor\elementor.php',
         'pro-elements\pro-elements.php',
     ];
@@ -119,16 +114,8 @@ function disable_plugins_update($value)
     if (isset($value->response['pro-elements/pro-elements.php'])) {
         unset($value->response['pro-elements/pro-elements.php']);
     }
-
-    // disable All-in-One WP Migration
-    if (isset($value->response['all-in-one-wp-migration-master/all-in-one-wp-migration.php'])) {
-        unset($value->response['all-in-one-wp-migration-master/all-in-one-wp-migration.php']);
-    }
     return $value;
 }
-
-// turn off auto update plugin
-// add_filter('auto_update_plugin', '__return_false');
 
 // include file function
 require CHILD_PATH . '/inc/security.php';

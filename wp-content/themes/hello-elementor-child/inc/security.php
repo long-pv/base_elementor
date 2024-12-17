@@ -52,40 +52,13 @@ function remove_comments_menu()
 }
 add_action('admin_menu', 'remove_comments_menu');
 
-// Remove wp's default comment function
+// Remove comments displayed in posts
 function disable_comments_and_pings_post_type()
 {
-    // Remove comments displayed in posts
     remove_post_type_support('post', 'comments');
     remove_post_type_support('post', 'trackbacks');
 }
 add_action('admin_init', 'disable_comments_and_pings_post_type');
-
-// redirect wp-admin and wp-register.php to the homepage
-add_action('init', 'custom_login_redirect');
-function custom_login_redirect()
-{
-    // prevent users from entering the registration page
-    if (strpos($_SERVER['REQUEST_URI'], 'wp-register.php') !== false) {
-        wp_redirect(home_url('/404'));
-        exit();
-    }
-
-    // Particularly, urls containing xmlrpc.php give status 403
-    if (strpos($_SERVER['REQUEST_URI'], 'xmlrpc.php') !== false) {
-        status_header(403);
-        exit();
-    }
-}
-
-// Apply a filter to the field value before saving
-function custom_modify_text_field($value, $post_id, $field)
-{
-    $value_change = custom_replace_value($value);
-
-    return $value_change;
-}
-add_filter('acf/update_value', 'custom_modify_text_field', 10, 3);
 
 // Block CORS in WordPress
 add_action('init', 'add_cors_http_header');
@@ -108,32 +81,6 @@ function cl_customize_rest_cors()
     });
 }
 add_action('rest_api_init', 'cl_customize_rest_cors', 15);
-
-// Removed scripts imported from editor in admin
-add_filter('content_save_pre', 'custom_content_save');
-function custom_content_save($content)
-{
-    $content = custom_replace_value($content);
-    $content = preg_replace('/\b(?:o[nN][eE]?[rR][rR]?[oO][rR]?)\b/i', '', $content);
-
-    return $content;
-}
-
-function custom_replace_value($text)
-{
-    $special_characters = [
-        '<script>',
-        '</script>',
-        'alert(',
-        '$(',
-        '&lt;script&gt;',
-        '&lt;/script&gt',
-        'document.',
-    ];
-    $text = str_replace($special_characters, '', $text);
-
-    return $text;
-}
 
 // Disable some endpoints for unauthenticated users
 add_filter('rest_endpoints', 'disable_default_endpoints');
