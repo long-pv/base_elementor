@@ -83,7 +83,6 @@ function activate_my_plugins()
     $plugins = [
         'advanced-custom-fields-pro\acf.php',
         'elementor\elementor.php',
-        'pro-elements\pro-elements.php',
     ];
 
     foreach ($plugins as $plugin) {
@@ -103,16 +102,6 @@ function disable_plugins_update($value)
     // disable acf pro
     if (isset($value->response['advanced-custom-fields-pro/acf.php'])) {
         unset($value->response['advanced-custom-fields-pro/acf.php']);
-    }
-
-    // disable Elementor
-    if (isset($value->response['elementor/elementor.php'])) {
-        unset($value->response['elementor/elementor.php']);
-    }
-
-    // disable PRO Elements
-    if (isset($value->response['pro-elements/pro-elements.php'])) {
-        unset($value->response['pro-elements/pro-elements.php']);
     }
     return $value;
 }
