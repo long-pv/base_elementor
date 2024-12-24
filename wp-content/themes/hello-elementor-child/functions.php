@@ -58,7 +58,7 @@ function child_theme_scripts()
     wp_enqueue_script('child_theme-script-main', CHILD_URI . '/assets/js/main.js', array('jquery'), _S_VERSION, true);
 
     // ajax admin
-    wp_localize_script('hello-child-main-js', 'custom_ajax', array('ajax_url' => admin_url('admin-ajax.php')));
+    wp_localize_script('hello-child-ajax_url', 'custom_ajax', array('ajax_url' => admin_url('admin-ajax.php')));
 }
 add_action('wp_enqueue_scripts', 'child_theme_scripts');
 

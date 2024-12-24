@@ -42,8 +42,30 @@ class Duplicate_Widget extends \Elementor\Widget_Base
         $settings = $this->get_settings_for_display();
 ?>
         <div class="duplicate_widget">
-            Html viết ở đây
+            <button class="custom_button">Click me</button>
+            <div class="notification_desc d-none">Show content</div>
         </div>
-<?php
+    <?php
     }
 }
+
+add_action('wp_footer', function () {
+    ?>
+    <script>
+        (function($) {
+            var custom_duplicate_widget = function($scope, $) {
+                $scope.on('click', '.custom_button', function() {
+                    $scope.find('.notification_desc').toggleClass('d-none');
+                });
+            };
+
+            $(window).on('elementor/frontend/init', function() {
+                elementorFrontend.hooks.addAction(
+                    'frontend/element_ready/Duplicate_Widget.default',
+                    custom_duplicate_widget
+                );
+            });
+        })(jQuery);
+    </script>
+<?php
+});
