@@ -16,7 +16,7 @@ class Duplicate_Widget extends \Elementor\Widget_Base
 
     public function get_icon()
     {
-        return 'eicon-code';
+        return 'eicon-code-bold'; // https://elementor.github.io/elementor-icons/
     }
 
     public function get_categories()
