@@ -21,7 +21,7 @@ class Duplicate_Widget extends \Elementor\Widget_Base
 
     public function get_categories()
     {
-        return ['custom_widgets_theme'];
+        return ['custom_builder_theme'];
     }
 
     protected function _register_controls()
