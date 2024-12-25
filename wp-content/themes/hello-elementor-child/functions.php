@@ -103,6 +103,12 @@ function disable_plugins_update($value)
     if (isset($value->response['advanced-custom-fields-pro/acf.php'])) {
         unset($value->response['advanced-custom-fields-pro/acf.php']);
     }
+    if (isset($value->response['elementor/elementor.php'])) {
+        unset($value->response['elementor/elementor.php']);
+    }
+    if (isset($value->response['elementor-pro/elementor-pro.php'])) {
+        unset($value->response['elementor-pro/elementor-pro.php']);
+    }
     return $value;
 }
 
