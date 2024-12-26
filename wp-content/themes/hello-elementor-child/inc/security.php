@@ -12,9 +12,12 @@
 function vf_remove_wp_version_strings($src)
 {
     global $wp_version;
-    parse_str(parse_url($src, PHP_URL_QUERY), $query);
-    if (!empty($query['ver']) && $query['ver'] === $wp_version) {
-        $src = remove_query_arg('ver', $src);
+    $query_string = parse_url($src, PHP_URL_QUERY);
+    if ($query_string) {
+        parse_str($query_string, $query);
+        if (!empty($query['ver']) && $query['ver'] === $wp_version) {
+            $src = remove_query_arg('ver', $src);
+        }
     }
     return $src;
 }
@@ -136,17 +139,6 @@ function custom_login_logo_url()
     return home_url();
 }
 add_filter('login_headerurl', 'custom_login_logo_url');
-
-
-// prevent access to the author page to get information
-add_action('template_redirect', 'redirect_author_pages');
-function redirect_author_pages()
-{
-    if (is_author()) {
-        wp_redirect(home_url('/404'));
-        exit();
-    }
-}
 
 // allow script iframe tag within posts
 function allow_iframe_script_tags($allowedposttags)
