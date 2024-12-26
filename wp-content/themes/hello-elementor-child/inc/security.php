@@ -261,15 +261,6 @@ function set_default_image_settings_on_login($user_login, $user)
 
 add_action('wp_login', 'set_default_image_settings_on_login', 10, 2);
 
-function remove_styles_and_scripts_from_content($content)
-{
-    $content = preg_replace('/<style[^>]*>.*?<\/style>/is', '', $content);
-    $content = preg_replace('/<script[^>]*>.*?<\/script>/is', '', $content);
-
-    return $content;
-}
-add_filter('the_content', 'remove_styles_and_scripts_from_content', 99);
-
 function add_dropdown_arrow_to_menu($items, $args)
 {
     if ($args->theme_location) {
