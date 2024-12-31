@@ -33,6 +33,37 @@ class Archive_Posts_Widget extends \Elementor\Widget_Base
             ]
         );
 
+        // Thêm ô select để chọn post type
+        $this->add_control(
+            'post_type',
+            [
+                'label' => __('Select Post Type', 'child_theme'),
+                'type' => \Elementor\Controls_Manager::SELECT,
+                'default' => 'post',
+                'options' => $this->get_post_types()
+            ]
+        );
+
+        $this->add_control(
+            'posts_per_page',
+            [
+                'label' => __('Number of Posts', 'child_theme'),
+                'type' => \Elementor\Controls_Manager::SELECT,
+                'options' => [
+                    10 => '10',
+                    15 => '15',
+                    20 => '20',
+                    25 => '25',
+                    30 => '30',
+                    35 => '35',
+                    40 => '40',
+                    45 => '45',
+                    50 => '50',
+                ],
+                'default' => '10',
+            ]
+        );
+
         $this->add_responsive_control(
             'columns',
             [
@@ -71,6 +102,16 @@ class Archive_Posts_Widget extends \Elementor\Widget_Base
         $this->end_controls_section();
     }
 
+    private function get_post_types()
+    {
+        $post_types = get_post_types(['public' => true], 'objects');
+        $options = [];
+        foreach ($post_types as $post_type) {
+            $options[$post_type->name] = $post_type->label;
+        }
+        return $options;
+    }
+
     protected function render()
     {
         $settings = $this->get_settings_for_display();
@@ -78,47 +119,72 @@ class Archive_Posts_Widget extends \Elementor\Widget_Base
         $columns_tablet = $settings['columns_tablet'] ?? 1;
         $columns_mobile = $settings['columns_mobile'] ?? 1;
         $enable_pagination = $settings['enable_pagination'] === 'yes' ? true : false;
+        $post_type = $settings['post_type'] ?? 'post';
+        $posts_per_page = $settings['posts_per_page'] ?? 10;
+        $paging = !empty($_GET['paging']) ? intval($_GET['paging']) : 1;
 
-        if (is_archive()) {
-            if (have_posts()) {
-                echo '<div class="row">';
-                $col_class = 'col-' . (12 / (int)  $columns_mobile) . ' col-md-' . (12 / (int)  $columns_tablet) . ' col-lg-' . (12 / (int)  $columns_desktop);
-                while (have_posts()):
-                    the_post();
+        $query_args = [
+            'post_type' => $post_type,
+            'posts_per_page' => $posts_per_page,
+            'paged' => $paging,
+        ];
+
+        // category
+        if (is_category()) {
+            $category = get_queried_object();
+            $query_args['cat'] = $category->term_id;
+        }
+
+        // tag
+        if (is_tag()) {
+            $tag = get_queried_object();
+            $query_args['tag_id'] = $tag->term_id;
+        }
+
+        $query_post = new WP_Query($query_args);
+
+        if ($query_post->have_posts()) {
+            echo '<div class="archive_post_list">';
+            echo '<div class="row archive_post_row">';
+            $col_class = 'col-' . (12 / (int) $columns_mobile) . ' col-md-' . (12 / (int) $columns_tablet) . ' col-lg-' . (12 / (int) $columns_desktop);
+
+            while ($query_post->have_posts()):
+                $query_post->the_post();
 ?>
-                    <div class="<?php echo $col_class; ?>">
-                        <div class="archive-post-item">
-                            <?php if (has_post_thumbnail()): ?>
-                                <img src="<?php echo get_the_post_thumbnail_url(get_the_ID(), 'medium'); ?>" class="img-fluid" alt="<?php the_title(); ?>">
-                            <?php endif; ?>
-                            <h3><?php the_title(); ?></h3>
-                            <p><?php echo get_the_excerpt(); ?></p>
-                        </div>
+                <div class="<?php echo esc_attr($col_class); ?>">
+                    <div class="archive_post_item">
+                        <?php if (has_post_thumbnail()): ?>
+                            <a class="d-block" href="<?php the_permalink(); ?>">
+                                <?php echo get_the_post_thumbnail(get_the_ID(), 'large'); ?>
+                            </a>
+                        <?php endif; ?>
+                        <h3><?php echo get_the_title(); ?></h3>
+                        <p><?php echo get_the_excerpt(); ?></p>
                     </div>
+                </div>
 <?php
-                endwhile;
-                echo '</div>'; // Close .row
+            endwhile;
+            echo '</div>'; // Close .row
+            echo '</div>';
 
-                if ($enable_pagination) {
-                    global $wp_query;
-                    echo '<div class="pagination">';
-                    echo paginate_links(
-                        array(
-                            'total' => $wp_query->max_num_pages,
-                            'current' => max(1, get_query_var('paged')),
-                            'end_size' => 2,
-                            'mid_size' => 1,
-                            'prev_text' => __('Prev', 'child_theme'),
-                            'next_text' => __('Next', 'child_theme'),
-                        )
-                    );
-                    echo '</div>';
-                }
-            } else {
-                echo 'There are no articles.';
+            if ($enable_pagination) {
+                echo '<div class="pagination">';
+                echo paginate_links(
+                    array(
+                        'total' => $query_post->max_num_pages,
+                        'current' => max(1, $paging),
+                        'format' => '?paging=%#%',
+                        'end_size' => 2,
+                        'mid_size' => 1,
+                        'prev_text' => __('Prev', 'child_theme'),
+                        'next_text' => __('Next', 'child_theme'),
+                    )
+                );
+                echo '</div>';
             }
         } else {
-            echo 'This is not a template archive.';
+            echo '<p>' . __('There are no articles.', 'child_theme') . '</p>';
         }
+        wp_reset_postdata();
     }
 }
