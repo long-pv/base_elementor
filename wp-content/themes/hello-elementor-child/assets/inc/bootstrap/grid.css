@@ -22,7 +22,7 @@
 	.container,
 	.container-sm {
 		max-width: 100%;
-		--bs-gutter-x: 20px;
+		--bs-gutter-x: 40px;
 	}
 }
 
@@ -40,7 +40,7 @@
 	.container-lg,
 	.container-md,
 	.container-sm {
-		max-width: calc(1440px + 120px);
+		max-width: calc(1200px + 120px);
 	}
 }
 

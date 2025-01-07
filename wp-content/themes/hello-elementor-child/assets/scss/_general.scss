@@ -1,16 +1,9 @@
-$body: #333333;
-$primary : #22A05B; //1
-$secondary : #29C06D; //2
-$success : #30E07F; //3
-$info : #36FF92; //4
-$warning : #E74C3C; //5
-
 body {
     line-height: 1.5 !important;
 }
 
 .elementor-widget-text-editor .elementor-widget-container>*:last-child {
-    margin: 0px;
+    margin: 0px !important;
 }
 
 .elementor-button-link {
@@ -20,7 +13,24 @@ body {
         display: flex !important;
     }
 
+    .elementor-button-icon svg {
+        width: auto;
+    }
+
     .elementor-button-content-wrapper {
         align-items: center !important;
+    }
+}
+
+.elementor-widget-icon-list {
+    .elementor-icon-list-icon {
+        svg {
+            margin: 0px !important;
+        }
+    }
+
+    .elementor-icon-list-text {
+        padding: 0px !important;
+        margin: 0px !important;
     }
 }

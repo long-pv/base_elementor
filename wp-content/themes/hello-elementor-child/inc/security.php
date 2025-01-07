@@ -41,28 +41,6 @@ add_filter('login_errors', 'vf_login_errors');
 // Disable XML-RPC
 add_filter('xmlrpc_enabled', '__return_false');
 
-// upload size limit 2MB
-add_filter('upload_size_limit', 'PBP_increase_upload');
-function PBP_increase_upload($bytes)
-{
-    return 524288 * 4 * 10;
-}
-
-// Remove the Comments menu from the Dashboard
-function remove_comments_menu()
-{
-    remove_menu_page('edit-comments.php');
-}
-add_action('admin_menu', 'remove_comments_menu');
-
-// Remove comments displayed in posts
-function disable_comments_and_pings_post_type()
-{
-    remove_post_type_support('post', 'comments');
-    remove_post_type_support('post', 'trackbacks');
-}
-add_action('admin_init', 'disable_comments_and_pings_post_type');
-
 // Block CORS in WordPress
 add_action('init', 'add_cors_http_header');
 add_action('send_headers', 'add_cors_http_header');
@@ -71,7 +49,6 @@ function add_cors_http_header()
     header("Access-Control-Allow-Origin: *");
     header("X-Powered-By: none");
 }
-
 function cl_customize_rest_cors()
 {
     remove_filter('rest_pre_serve_request', 'rest_send_cors_headers');
@@ -132,13 +109,6 @@ function custom_login_logo()
   </style>';
 }
 add_action('login_head', 'custom_login_logo');
-
-// change login logo url
-function custom_login_logo_url()
-{
-    return home_url();
-}
-add_filter('login_headerurl', 'custom_login_logo_url');
 
 // allow script iframe tag within posts
 function allow_iframe_script_tags($allowedposttags)
@@ -250,14 +220,4 @@ function set_default_image_settings_on_login($user_login, $user)
 
     update_user_meta($user_id, $meta_key, $current_settings);
 }
-
 add_action('wp_login', 'set_default_image_settings_on_login', 10, 2);
-
-function add_dropdown_arrow_to_menu($items, $args)
-{
-    if ($args->theme_location) {
-        $items = preg_replace('/(<a.*?>)(.*)<\/a>/i', '<span class="dropdown-arrow"></span>$1$2</a>', $items);
-    }
-    return $items;
-}
-add_filter('wp_nav_menu_items', 'add_dropdown_arrow_to_menu', 10, 2);

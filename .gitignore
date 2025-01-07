@@ -47,6 +47,12 @@ debug.log
 dup-installer/
 changed_files/
 
+# LiteSpeed Cache
+object-cache.php
+.litespeed_conf.dat
+.htaccess.bk
+wp-content/litespeed/
+
 # wp-content
 wp-content/uploads/
 wp-content/languages/
