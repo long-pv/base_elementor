@@ -234,9 +234,9 @@
 
 ["object-persistent",true]
 
-["object-admin",false]
+["object-admin",true]
 
-["object-transients",false]
+["object-transients",true]
 
 ["object-db_id",0]
 
