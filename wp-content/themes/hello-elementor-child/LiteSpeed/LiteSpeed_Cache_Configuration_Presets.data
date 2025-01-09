@@ -4,7 +4,7 @@
 
 ["auto_upgrade",true]
 
-["api_key","E5315428F9C10A718A79AC47496FD485"]
+["api_key",""]
 
 ["server_ip",""]
 
@@ -54,7 +54,7 @@
 
 ["cache-exc",[]]
 
-["cache-exc_roles",[]]
+["cache-exc_roles",["administrator","author","contributor","editor"]]
 
 ["cache-drop_qs",["fbclid","gclid","utm*","_ga"]]
 
@@ -84,7 +84,7 @@
 
 ["purge-stale",true]
 
-["purge-post_all",false]
+["purge-post_all",true]
 
 ["purge-post_f",true]
 
@@ -96,11 +96,11 @@
 
 ["purge-post_a",true]
 
-["purge-post_y",false]
+["purge-post_y",true]
 
 ["purge-post_m",true]
 
-["purge-post_d",false]
+["purge-post_d",true]
 
 ["purge-post_t",true]
 
@@ -196,7 +196,7 @@
 
 ["optm-css_font_display",false]
 
-["optm-js_defer",0]
+["optm-js_defer",1]
 
 ["optm-emoji_rm",true]
 
@@ -234,9 +234,9 @@
 
 ["object-persistent",true]
 
-["object-admin",true]
+["object-admin",false]
 
-["object-transients",true]
+["object-transients",false]
 
 ["object-db_id",0]
 
@@ -258,7 +258,7 @@
 
 ["optm-localize_domains",["### Popular scripts ###","https:\/\/platform.twitter.com\/widgets.js","https:\/\/connect.facebook.net\/en_US\/fbevents.js"]]
 
-["media-lazy",false]
+["media-lazy",true]
 
 ["media-lazy_placeholder",""]
 
@@ -296,7 +296,7 @@
 
 ["media-lqip_exc",["https:\/\/fitizenapp.com\/wp-content\/uploads\/2024\/12\/Logo-Horizontal.svg"]]
 
-["media-vpi",false]
+["media-vpi",true]
 
 ["media-vpi_cron",true]
 
@@ -366,7 +366,7 @@
 
 ["cdn-exc",[]]
 
-["cdn-quic",true]
+["cdn-quic",false]
 
 ["cdn-cloudflare",false]
 
