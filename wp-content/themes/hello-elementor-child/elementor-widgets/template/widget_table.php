@@ -75,7 +75,7 @@ class Custom_Table_Widget extends \Elementor\Widget_Base
                         'label' => __('Row Content', 'child_theme'),
                         'type' => \Elementor\Controls_Manager::TEXTAREA,
                         'default' => __('Content 1|Content 2|Content 3', 'child_theme'),
-                        'description' => __('Separate column content with a pipe (|). Example: Content 1|Content 2|Content 3', 'child_theme'),
+                        'description' => __('Separate column content with a pipe (|). Example: Content 1|Content 2|Content 3|..v..v..', 'child_theme'),
                     ],
                 ],
                 'default' => [],
@@ -158,7 +158,7 @@ class Custom_Table_Widget extends \Elementor\Widget_Base
             [
                 'name' => 'table_border',
                 'label' => __('Table Border', 'child_theme'),
-                'selector' => '{{WRAPPER}} .custom_table_widget, {{WRAPPER}} .custom_table_widget td',
+                'selector' => '{{WRAPPER}} .custom_table_widget, {{WRAPPER}} .custom_table_widget td, {{WRAPPER}} .custom_table_widget th', // Thêm th vào đây
             ]
         );
 
@@ -181,6 +181,9 @@ class Custom_Table_Widget extends \Elementor\Widget_Base
     {
         $settings = $this->get_settings_for_display();
 
+        // Lấy số lượng cột trong bảng
+        $columns_count = count($settings['table_columns']);
+
         echo '<table class="custom_table_widget">';
 
         // Hiển thị tiêu đề cột
@@ -195,9 +198,20 @@ class Custom_Table_Widget extends \Elementor\Widget_Base
         foreach ($settings['table_rows'] as $row) {
             echo '<tr>';
             $contents = explode('|', $row['row_content']);
+
+            // Lọc số cột cho mỗi hàng (sử dụng chỉ số cột tối đa là $columns_count)
+            $contents = array_slice($contents, 0, $columns_count);
+
+            // Hiển thị nội dung cho từng cột, nếu số lượng cột ít hơn thì bổ sung ô trống
             foreach ($contents as $content) {
                 echo '<td>' . esc_html($content) . '</td>';
             }
+
+            // Nếu số lượng cột ít hơn số cột của tiêu đề, ta thêm ô trống
+            for ($i = count($contents); $i < $columns_count; $i++) {
+                echo '<td></td>';
+            }
+
             echo '</tr>';
         }
         echo '</tbody>';
