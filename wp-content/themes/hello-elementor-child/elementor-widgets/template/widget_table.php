@@ -174,6 +174,25 @@ class Custom_Table_Widget extends \Elementor\Widget_Base
             ]
         );
 
+        // Thêm trường chỉnh sửa padding cho cả td và th
+        $this->add_control(
+            'table_padding',
+            [
+                'label' => __('Table Padding',  'child_theme'),
+                'type' => \Elementor\Controls_Manager::DIMENSIONS,
+                'default' => [
+                    'top' => '4',
+                    'right' => '4',
+                    'bottom' => '4',
+                    'left' => '4',
+                    'unit' => 'px',
+                ],
+                'selectors' => [
+                    '{{WRAPPER}} .custom_table_widget td, {{WRAPPER}} .custom_table_widget th' => 'padding: {{TOP}}px {{RIGHT}}px {{BOTTOM}}px {{LEFT}}px;',
+                ],
+            ]
+        );
+
         $this->end_controls_section();
     }
 
@@ -184,7 +203,7 @@ class Custom_Table_Widget extends \Elementor\Widget_Base
         // Lấy số lượng cột trong bảng
         $columns_count = count($settings['table_columns']);
 
-        echo '<table class="custom_table_widget">';
+        echo '<table class="custom_table_widget" style="margin: 0px;padding: 0px;">';
 
         // Hiển thị tiêu đề cột
         echo '<thead><tr>';
