@@ -57,15 +57,19 @@ function child_theme_scripts()
     // wp_enqueue_script('child_theme-script-select2', CHILD_URI . '/assets/inc/select2/select2.js', array('jquery'), _S_VERSION, true);
 
     // add custom main css/js
-    wp_enqueue_style('child_theme-style-main', CHILD_URI . '/assets/css/main.css', array(), _S_VERSION);
-    wp_enqueue_script('child_theme-script-main', CHILD_URI . '/assets/js/main.js', array('jquery'), _S_VERSION, true);
+    $main_css_file_path = CHILD_PATH . '/assets/css/main.css';
+    $main_js_file_path = CHILD_PATH . '/assets/js/main.js';
+    $ver_main_css = file_exists($main_css_file_path) ? filemtime($main_css_file_path) : _S_VERSION;
+    $ver_main_js = file_exists($main_js_file_path) ? filemtime($main_js_file_path) : _S_VERSION;
+    wp_enqueue_style('dev_theme-style-main', CHILD_URI . '/assets/css/main.css', array(), $ver_main_css);
+    wp_enqueue_script('dev_theme-script-main', CHILD_URI . '/assets/js/main.js', array('jquery'), $ver_main_js, true);
 
     // ajax admin
     wp_localize_script('hello-child-ajax_url', 'custom_ajax', array('ajax_url' => admin_url('admin-ajax.php')));
 }
 add_action('wp_enqueue_scripts', 'child_theme_scripts');
 
-// Setup theme setting page
+// Tạo menu theme settings chung
 if (function_exists('acf_add_options_page')) {
     $name_option = 'Theme Settings';
     acf_add_options_page(
@@ -110,7 +114,6 @@ function disable_plugins_update($value)
 }
 
 // include file function
-require CHILD_PATH . '/inc/security.php';
 require CHILD_PATH . '/inc/ajax.php';
 require CHILD_PATH . '/inc/custom_theme.php';
 
