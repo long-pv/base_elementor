@@ -130,3 +130,15 @@ function load_custom_widgets()
     require CHILD_PATH . '/elementor-widgets/index.php';
 }
 add_action('elementor/init', 'load_custom_widgets');
+
+function remove_plugin_notices()
+{
+    global $wp_filter;
+    if (isset($wp_filter['admin_notices'])) {
+        unset($wp_filter['admin_notices']);
+    }
+    if (isset($wp_filter['all_admin_notices'])) {
+        unset($wp_filter['all_admin_notices']);
+    }
+}
+add_action('admin_init', 'remove_plugin_notices');
