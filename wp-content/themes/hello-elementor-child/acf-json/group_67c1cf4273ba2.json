@@ -1,13 +1,13 @@
 {
-    "key": "group_671efd93e23f0",
-    "title": "General settings",
+    "key": "group_67c1cf4273ba2",
+    "title": "Insert code settings",
     "fields": [
         {
-            "key": "field_67c1c7e66c034",
-            "label": "Turn off admin notifications",
-            "name": "turn_off_admin_notifications",
+            "key": "field_67c1cf42ced80",
+            "label": "Insert code header",
+            "name": "insert_code_header",
             "aria-label": "",
-            "type": "true_false",
+            "type": "textarea",
             "instructions": "",
             "required": 0,
             "conditional_logic": 0,
@@ -16,18 +16,18 @@
                 "class": "",
                 "id": ""
             },
-            "message": "",
-            "default_value": 0,
-            "ui_on_text": "",
-            "ui_off_text": "",
-            "ui": 1
+            "default_value": "",
+            "maxlength": "",
+            "rows": 6,
+            "placeholder": "",
+            "new_lines": ""
         },
         {
-            "key": "field_67c1ca276ff1a",
-            "label": "Hide comment function",
-            "name": "hide_comment_function",
+            "key": "field_67c1cf6dced81",
+            "label": "Insert code body",
+            "name": "insert_code_body",
             "aria-label": "",
-            "type": "true_false",
+            "type": "textarea",
             "instructions": "",
             "required": 0,
             "conditional_logic": 0,
@@ -36,18 +36,18 @@
                 "class": "",
                 "id": ""
             },
-            "message": "",
-            "default_value": 0,
-            "ui_on_text": "",
-            "ui_off_text": "",
-            "ui": 1
+            "default_value": "",
+            "maxlength": "",
+            "rows": 6,
+            "placeholder": "",
+            "new_lines": ""
         },
         {
-            "key": "field_67c1d2daf0c90",
-            "label": "Disable auto update",
-            "name": "disable_auto_update",
+            "key": "field_67c1cf75ced82",
+            "label": "Insert code footer",
+            "name": "insert_code_footer",
             "aria-label": "",
-            "type": "true_false",
+            "type": "textarea",
             "instructions": "",
             "required": 0,
             "conditional_logic": 0,
@@ -56,11 +56,11 @@
                 "class": "",
                 "id": ""
             },
-            "message": "",
-            "default_value": 0,
-            "ui_on_text": "",
-            "ui_off_text": "",
-            "ui": 1
+            "default_value": "",
+            "maxlength": "",
+            "rows": 6,
+            "placeholder": "",
+            "new_lines": ""
         }
     ],
     "location": [
@@ -68,7 +68,7 @@
             {
                 "param": "options_page",
                 "operator": "==",
-                "value": "general-settings"
+                "value": "insert-code-settings"
             }
         ]
     ],
@@ -81,5 +81,5 @@
     "active": true,
     "description": "",
     "show_in_rest": 0,
-    "modified": 1740755943
+    "modified": 1740755924
 }
