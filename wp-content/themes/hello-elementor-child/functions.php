@@ -287,3 +287,26 @@ function custom_login_logo()
     echo '<style type="text/css">#login h1 a {display: none !important;}</style>';
 }
 add_action('login_head', 'custom_login_logo');
+
+// validate tiêu đề các bài viết
+add_action('admin_footer', 'validate_title_post_admin');
+function validate_title_post_admin()
+{
+?>
+    <script>
+        jQuery(document).ready(function($) {
+            // Validate post title
+            if ($('#post').length > 0) {
+                $('#post').submit(function() {
+                    var title_post = $('#title').val();
+                    if (title_post.trim() === '') {
+                        alert('Please enter "Title".');
+                        $('#title').focus();
+                        return false;
+                    }
+                });
+            }
+        });
+    </script>
+<?php
+}
