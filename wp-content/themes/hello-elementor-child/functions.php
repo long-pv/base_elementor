@@ -144,7 +144,7 @@ function activate_my_plugins()
 }
 add_action('admin_init', 'activate_my_plugins');
 
-// stop upgrading wp cerber plugin
+// stop upgrading ACF pro plugin
 add_filter('site_transient_update_plugins', 'disable_plugins_update');
 function disable_plugins_update($value)
 {
@@ -250,6 +250,13 @@ function disable_auto_update_if_enabled()
     }
 }
 add_action('init', 'disable_auto_update_if_enabled');
+
+function custom_upload_size_limit($bytes)
+{
+    $upload_limit = get_field('upload_size_limit', 'option') ?? 2;
+    return $upload_limit * 1024 * 1024;
+}
+add_filter('upload_size_limit', 'custom_upload_size_limit');
 // end general settings
 
 // remove wp_version
