@@ -168,95 +168,97 @@ add_action('elementor/init', 'load_custom_widgets');
 
 // general settings
 // Hide notification in admin
-function remove_plugin_notices()
-{
-    $turn_off_admin_notifications = get_field('turn_off_admin_notifications', 'option') ?? false;
-    if ($turn_off_admin_notifications) {
-        global $wp_filter;
-        if (isset($wp_filter['admin_notices'])) {
-            unset($wp_filter['admin_notices']);
-        }
-        if (isset($wp_filter['all_admin_notices'])) {
-            unset($wp_filter['all_admin_notices']);
-        }
-    }
-}
-add_action('admin_init', 'remove_plugin_notices');
-
-// Hide comment menu
-function remove_comments_admin_menu()
-{
-    $hide_comment_function = get_field('hide_comment_function', 'option') ?? false;
-    if ($hide_comment_function) {
-        remove_menu_page('edit-comments.php');
-    }
-}
-add_action('admin_menu', 'remove_comments_admin_menu');
-function remove_comments_admin_bar($wp_admin_bar)
-{
-    $hide_comment_function = get_field('hide_comment_function', 'option') ?? false;
-    if ($hide_comment_function) {
-        $wp_admin_bar->remove_node('comments');
-    }
-}
-add_action('admin_bar_menu', 'remove_comments_admin_bar', 999);
-
-// Chèn code vào <head>
-function insert_custom_code_into_header()
-{
-    if (!is_admin()) {
-        $custom_code = get_field('insert_code_header', 'option');
-        if (!empty($custom_code)) {
-            echo $custom_code;
+if (function_exists('get_field')) {
+    function remove_plugin_notices()
+    {
+        $turn_off_admin_notifications = get_field('turn_off_admin_notifications', 'option') ?? false;
+        if ($turn_off_admin_notifications) {
+            global $wp_filter;
+            if (isset($wp_filter['admin_notices'])) {
+                unset($wp_filter['admin_notices']);
+            }
+            if (isset($wp_filter['all_admin_notices'])) {
+                unset($wp_filter['all_admin_notices']);
+            }
         }
     }
-}
-add_action('wp_head', 'insert_custom_code_into_header', 99);
+    add_action('admin_init', 'remove_plugin_notices');
 
-// Chèn code ngay sau thẻ <body>
-function insert_custom_code_into_body()
-{
-    if (!is_admin()) {
-        $custom_code = get_field('insert_code_body', 'option');
-        if (!empty($custom_code)) {
-            echo $custom_code;
+    // Hide comment menu
+    function remove_comments_admin_menu()
+    {
+        $hide_comment_function = get_field('hide_comment_function', 'option') ?? false;
+        if ($hide_comment_function) {
+            remove_menu_page('edit-comments.php');
         }
     }
-}
-add_action('wp_body_open', 'insert_custom_code_into_body', 99);
-
-// Chèn code vào footer trước </body>
-function insert_custom_code_into_footer()
-{
-    if (!is_admin()) {
-        $custom_code = get_field('insert_code_footer', 'option');
-        if (!empty($custom_code)) {
-            echo $custom_code;
+    add_action('admin_menu', 'remove_comments_admin_menu');
+    function remove_comments_admin_bar($wp_admin_bar)
+    {
+        $hide_comment_function = get_field('hide_comment_function', 'option') ?? false;
+        if ($hide_comment_function) {
+            $wp_admin_bar->remove_node('comments');
         }
     }
-}
-add_action('wp_footer', 'insert_custom_code_into_footer', 99);
+    add_action('admin_bar_menu', 'remove_comments_admin_bar', 999);
 
-// tắt chức năng tự cập nhật
-function disable_auto_update_if_enabled()
-{
-    $disable_auto_update = get_field('disable_auto_update', 'option');
-    if ($disable_auto_update) {
-        define('AUTOMATIC_UPDATER_DISABLED', true);
-        define('WP_AUTO_UPDATE_CORE', false);
-        define('DISALLOW_FILE_MODS', true);
-        define('DISALLOW_FILE_EDIT', true);
-        add_filter('auto_update_plugin', '__return_false');
+    // Chèn code vào <head>
+    function insert_custom_code_into_header()
+    {
+        if (!is_admin()) {
+            $custom_code = get_field('insert_code_header', 'option');
+            if (!empty($custom_code)) {
+                echo $custom_code;
+            }
+        }
     }
-}
-add_action('init', 'disable_auto_update_if_enabled');
+    add_action('wp_head', 'insert_custom_code_into_header', 99);
 
-function custom_upload_size_limit($bytes)
-{
-    $upload_limit = get_field('upload_size_limit', 'option') ?? 2;
-    return $upload_limit * 1024 * 1024;
+    // Chèn code ngay sau thẻ <body>
+    function insert_custom_code_into_body()
+    {
+        if (!is_admin()) {
+            $custom_code = get_field('insert_code_body', 'option');
+            if (!empty($custom_code)) {
+                echo $custom_code;
+            }
+        }
+    }
+    add_action('wp_body_open', 'insert_custom_code_into_body', 99);
+
+    // Chèn code vào footer trước </body>
+    function insert_custom_code_into_footer()
+    {
+        if (!is_admin()) {
+            $custom_code = get_field('insert_code_footer', 'option');
+            if (!empty($custom_code)) {
+                echo $custom_code;
+            }
+        }
+    }
+    add_action('wp_footer', 'insert_custom_code_into_footer', 99);
+
+    // tắt chức năng tự cập nhật
+    function disable_auto_update_if_enabled()
+    {
+        $disable_auto_update = get_field('disable_auto_update', 'option');
+        if ($disable_auto_update) {
+            define('AUTOMATIC_UPDATER_DISABLED', true);
+            define('WP_AUTO_UPDATE_CORE', false);
+            define('DISALLOW_FILE_MODS', true);
+            define('DISALLOW_FILE_EDIT', true);
+            add_filter('auto_update_plugin', '__return_false');
+        }
+    }
+    add_action('init', 'disable_auto_update_if_enabled');
+
+    function custom_upload_size_limit($bytes)
+    {
+        $upload_limit = get_field('upload_size_limit', 'option') ?: 20;
+        return $upload_limit * 1024 * 1024;
+    }
+    add_filter('upload_size_limit', 'custom_upload_size_limit');
 }
-add_filter('upload_size_limit', 'custom_upload_size_limit');
 // end general settings
 
 // remove wp_version
