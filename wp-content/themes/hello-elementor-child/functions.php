@@ -5,6 +5,8 @@ define('TEMPLATE_PATH', CHILD_PATH . '/elementor-widgets/template/');
 if (!defined('_S_VERSION')) {
     define('_S_VERSION', '1.0.0');
 }
+// get currernt lang
+define('LANG', function_exists('pll_current_language') ? pll_current_language('slug') : 'vi');
 
 // turn on auto update core wp
 // define('WP_AUTO_UPDATE_CORE', true); // Bật cập nhật tự động WordPress
@@ -313,8 +315,14 @@ function validate_title_post_admin()
 <?php
 }
 
+// thêm thương hiệu
 function xemer_theme_custom_admin_footer()
 {
     echo 'Thanks for using WordPress. Powered by <a target="_blank" href="https://tramkienthuc.net/">Xemer Theme</a>.';
 }
 add_filter('admin_footer_text', 'xemer_theme_custom_admin_footer');
+
+// tối đa revision
+add_filter('wp_revisions_to_keep', function ($num, $post) {
+    return 3;
+}, 10, 2);
