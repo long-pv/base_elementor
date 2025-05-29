@@ -48,16 +48,3 @@ class Duplicate_Widget extends \Elementor\Widget_Base
     <?php
     }
 }
-
-add_action('wp_footer', function () {
-    ?>
-    <style>
-        /* viết css ở đây */
-    </style>
-    <script>
-        (function($) {
-            // viết js ở đây
-        })(jQuery);
-    </script>
-<?php
-});
