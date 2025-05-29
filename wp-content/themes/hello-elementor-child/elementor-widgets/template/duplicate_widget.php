@@ -21,7 +21,7 @@ class Duplicate_Widget extends \Elementor\Widget_Base
 
     public function get_categories()
     {
-        return ['custom_builder_theme'];
+        return ['general'];
     }
 
     protected function _register_controls()
@@ -51,20 +51,12 @@ class Duplicate_Widget extends \Elementor\Widget_Base
 
 add_action('wp_footer', function () {
     ?>
+    <style>
+        /* viết css ở đây */
+    </style>
     <script>
         (function($) {
-            var custom_duplicate_widget = function($scope, $) {
-                $scope.on('click', '.custom_button', function() {
-                    $scope.find('.notification_desc').toggleClass('d-none');
-                });
-            };
-
-            $(window).on('elementor/frontend/init', function() {
-                elementorFrontend.hooks.addAction(
-                    'frontend/element_ready/Duplicate_Widget.default',
-                    custom_duplicate_widget
-                );
-            });
+            // viết js ở đây
         })(jQuery);
     </script>
 <?php
