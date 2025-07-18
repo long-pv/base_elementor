@@ -13,8 +13,18 @@ class Url_Prop_Type extends Plain_Prop_Type {
 		return 'url';
 	}
 
+	public function skip_validation(): self {
+		$this->settings['skip_validation'] = true;
+
+		return $this;
+	}
+
 	protected function validate_value( $value ): bool {
-		return ! ! wp_http_validate_url( $value );
+		if ( ! empty( $this->settings['skip_validation'] ) ) {
+			return true;
+		}
+
+		return (bool) wp_http_validate_url( $value );
 	}
 
 	protected function sanitize_value( $value ) {

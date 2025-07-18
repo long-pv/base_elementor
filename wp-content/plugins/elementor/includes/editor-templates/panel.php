@@ -1,14 +1,11 @@
 <?php
 namespace Elementor;
 
-use Elementor\Modules\EditorAppBar\Module as App_Bar_Module;
-
 if ( ! defined( 'ABSPATH' ) ) {
 	exit; // Exit if accessed directly.
 }
 
 $document = Plugin::$instance->documents->get( Plugin::$instance->editor->get_post_id() );
-$is_app_bar_active = Plugin::$instance->experiments->is_feature_active( App_Bar_Module::EXPERIMENT_NAME );
 ?>
 <script type="text/template" id="tmpl-elementor-panel">
 	<div id="elementor-panel-state-loading">
@@ -56,7 +53,7 @@ $is_app_bar_active = Plugin::$instance->experiments->is_feature_active( App_Bar_
 	<div><?php echo esc_html__( 'Now you can choose where you want to go on the site from the following options', 'elementor' ); ?></div>
 	<div>
 		<!-- translators: 1: Opening HTML <a> tag, 2: closing HTML <a> tag. -->
-		<?php echo sprintf(
+		<?php printf(
 			esc_html__( 'Any time you can change the settings in %1$sUser Preferences%2$s', 'elementor' ),
 			'<a id="user-preferences">',
 			'</a>'
@@ -81,15 +78,7 @@ $is_app_bar_active = Plugin::$instance->experiments->is_feature_active( App_Bar_
 		<i class="eicon-cog" aria-hidden="true"></i>
 	</button>
 	<# if ( $e.components.get( 'document/elements' ).utils.showNavigator() ) { #>
-	<button id="elementor-panel-footer-navigator" class="elementor-panel-footer-tool tooltip-target" data-tooltip="<?php
-		echo $is_app_bar_active
-			? esc_attr__( 'Structure', 'elementor' )
-			: esc_attr__( 'Navigator', 'elementor' );
-	?>" aria-label="<?php
-		echo $is_app_bar_active
-			? esc_attr__( 'Structure', 'elementor' )
-			: esc_attr__( 'Navigator', 'elementor' );
-?>">
+	<button id="elementor-panel-footer-navigator" class="elementor-panel-footer-tool tooltip-target" data-tooltip="<?php echo esc_attr__( 'Structure', 'elementor' ); ?>" aria-label="<?php echo esc_attr__( 'Structure', 'elementor' ); ?>">
 		<i class="eicon-navigator" aria-hidden="true"></i>
 	</button>
 	<# } #>

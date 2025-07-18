@@ -147,8 +147,6 @@ class Frontend extends App {
 		'elementor-default',
 	];
 
-	private $google_fonts_index = 0;
-
 	/**
 	 * Front End constructor.
 	 *
@@ -237,21 +235,8 @@ class Frontend extends App {
 
 		// Priority 7 to allow google fonts in header template to load in <head> tag
 		add_action( 'wp_head', [ $this, 'print_fonts_links' ], 7 );
-		add_action( 'wp_head', [ $this, 'print_google_fonts_preconnect_tag' ], 8 );
 		add_action( 'wp_head', [ $this, 'add_theme_color_meta_tag' ] );
 		add_action( 'wp_footer', [ $this, 'wp_footer' ] );
-	}
-
-	public function print_google_fonts_preconnect_tag() {
-		if ( 0 >= $this->google_fonts_index ) {
-			return;
-		}
-
-		if ( Plugin::$instance->experiments->is_feature_active( 'e_local_google_fonts' ) ) {
-			return;
-		}
-
-		echo '<link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin>';
 	}
 
 	/**
@@ -431,7 +416,7 @@ class Frontend extends App {
 			[
 				'jquery-ui-position',
 			],
-			'4.9.3',
+			'4.9.4',
 			true
 		);
 
@@ -618,8 +603,6 @@ class Frontend extends App {
 		 */
 		do_action( 'elementor/frontend/before_enqueue_scripts' );
 
-		wp_enqueue_script( 'elementor-frontend' );
-
 		$this->print_config();
 
 		$this->enqueue_conditional_assets();
@@ -718,7 +701,7 @@ class Frontend extends App {
 	 *
 	 * @access public
 	 *
-	 * @param string $frontend_file_name
+	 * @param string  $frontend_file_name
 	 * @param boolean $custom_file
 	 *
 	 * @return string frontend file URL
@@ -744,7 +727,7 @@ class Frontend extends App {
 	 * @since 3.5.0
 	 * @access public
 	 *
-	 * @param string $frontend_file_name
+	 * @param string  $frontend_file_name
 	 * @param boolean $custom_file
 	 *
 	 * @return string frontend file path
@@ -921,7 +904,7 @@ class Frontend extends App {
 			$this->enqueued_icon_fonts[] = $css_url;
 		}
 
-		//clear enqueued icons
+		// Clear enqueued icons.
 		$this->icon_fonts_to_enqueue = [];
 	}
 
@@ -1023,32 +1006,14 @@ class Frontend extends App {
 
 		// Print used fonts
 		if ( ! empty( $google_fonts['google'] ) ) {
-			$this->google_fonts_index++;
-
-			if ( Plugin::$instance->experiments->is_feature_active( 'e_local_google_fonts' ) ) {
-				foreach ( $google_fonts['google'] as $current_font ) {
-					Google_Font::enqueue( $current_font );
-				}
-			} else {
-				$fonts_url = $this->get_stable_google_fonts_url( $google_fonts['google'] );
-
-				wp_enqueue_style( 'google-fonts-' . $this->google_fonts_index, $fonts_url ); // phpcs:ignore WordPress.WP.EnqueuedResourceParameters.MissingVersion
+			foreach ( $google_fonts['google'] as $current_font ) {
+				Google_Font::enqueue( $current_font );
 			}
 		}
 
 		if ( ! empty( $google_fonts['early'] ) ) {
-			if ( Plugin::$instance->experiments->is_feature_active( 'e_local_google_fonts' ) ) {
-				foreach ( $google_fonts['early'] as $current_font ) {
-					Google_Font::enqueue( $current_font, Google_Font::TYPE_EARLYACCESS );
-				}
-			} else {
-				$early_access_font_urls = $this->get_early_access_google_font_urls( $google_fonts['early'] );
-
-				foreach ( $early_access_font_urls as $ea_font_url ) {
-					$this->google_fonts_index++;
-
-					wp_enqueue_style( 'google-earlyaccess-' . $this->google_fonts_index, $ea_font_url ); // phpcs:ignore WordPress.WP.EnqueuedResourceParameters.MissingVersion
-				}
+			foreach ( $google_fonts['early'] as $current_font ) {
+				Google_Font::enqueue( $current_font, Google_Font::TYPE_EARLYACCESS );
 			}
 		}
 	}
@@ -1238,7 +1203,7 @@ class Frontend extends App {
 	 * @since 1.0.0
 	 * @access public
 	 *
-	 * @param int $post_id The post ID.
+	 * @param int  $post_id The post ID.
 	 *
 	 * @param bool $with_css Optional. Whether to retrieve the content with CSS
 	 *                       or not. Default is false.
@@ -1526,7 +1491,7 @@ class Frontend extends App {
 	 * @access private
 	 * @since 2.0.4
 	 *
-	 * @param $content
+	 * @param string $content
 	 *
 	 * @return string
 	 */
