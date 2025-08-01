@@ -5,12 +5,12 @@ define('TEMPLATE_PATH', CHILD_PATH . '/elementor-widgets/template/');
 if (!defined('_S_VERSION')) {
     define('_S_VERSION', '1.0.0');
 }
-if (! defined('MEMORY_LIMIT')) {
-    define('MEMORY_LIMIT', '256M');
+if (!defined('WP_MEMORY_LIMIT')) {
+    define('WP_MEMORY_LIMIT', '256M');
 }
-// get currernt lang
-define('LANG', function_exists('pll_current_language') ? pll_current_language('slug') : 'vi');
-
+if (!defined('WP_MAX_MEMORY_LIMIT')) {
+    define('WP_MAX_MEMORY_LIMIT', '512M');
+}
 // turn on auto update core wp
 define('WP_AUTO_UPDATE_CORE', true); // Bật cập nhật tự động WordPress
 define('AUTOMATIC_UPDATER_DISABLED', false); // Đảm bảo cập nhật tự động không bị tắt
@@ -124,9 +124,6 @@ function disable_plugins_update($value)
     return $value;
 }
 
-// include file function
-require CHILD_PATH . '/inc/custom_theme.php';
-
 // load widgets library by elementor
 function load_custom_widgets()
 {
@@ -157,44 +154,15 @@ function remove_version_wp()
 add_filter('the_generator', 'remove_version_wp');
 // end remove wp_version
 
-// hide default logo on login page
-function custom_login_logo()
-{
-    echo '<style type="text/css">#login h1 a {display: none !important;}</style>';
-}
-add_action('login_head', 'custom_login_logo');
-
-// validate tiêu đề các bài viết
-add_action('admin_footer', 'validate_title_post_admin');
-function validate_title_post_admin()
-{
-?>
-    <script>
-        jQuery(document).ready(function($) {
-            // Validate post title
-            if ($('#post').length > 0) {
-                $('#post').submit(function() {
-                    var title_post = $('#title').val();
-                    if (title_post.trim() === '') {
-                        alert('Please enter "Title".');
-                        $('#title').focus();
-                        return false;
-                    }
-                });
-            }
-        });
-    </script>
-<?php
-}
-
-// thêm thương hiệu
-function xemer_theme_custom_admin_footer()
-{
-    echo 'Thanks for using WordPress. Powered by <a target="_blank" href="https://tramkienthuc.net/">Xemer Theme</a>.';
-}
-add_filter('admin_footer_text', 'xemer_theme_custom_admin_footer');
-
 // tối đa revision
 add_filter('wp_revisions_to_keep', function ($num, $post) {
     return 3;
 }, 10, 2);
+
+add_shortcode('bcn_display', function () {
+    if (function_exists('bcn_display')) {
+        ob_start();
+        bcn_display();
+        return ob_get_clean();
+    }
+});
